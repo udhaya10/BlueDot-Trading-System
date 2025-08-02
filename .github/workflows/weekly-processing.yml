@@ -104,19 +104,24 @@ jobs:
         git clone --branch gh-pages --single-branch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-temp
         
         # Remove old files for this week
-        rm -rf gh-pages-temp/data/weekly/*.csv
+        cd gh-pages-temp
+        git rm -rf data/weekly/*.csv || true
         
         # Copy new files
-        mkdir -p gh-pages-temp/data/weekly
-        cp -r data/output/weekly/${{ steps.week.outputs.WEEK }}/* gh-pages-temp/data/weekly/
+        mkdir -p data/weekly
+        cp -r ../data/output/weekly/${{ steps.week.outputs.WEEK }}/* data/weekly/
+        
+        # Show what we're committing
+        echo "Files to commit:"
+        ls -la data/weekly/
         
         # Commit and push
-        cd gh-pages-temp
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add .
+        git add -A
+        git status
         git commit -m "Deploy weekly data for ${{ steps.week.outputs.WEEK }} - $(date)" || echo "No changes to commit"
-        git push origin gh-pages
+        git push origin gh-pages --force-with-lease
         
     - name: 📊 Generate Summary
       if: always()

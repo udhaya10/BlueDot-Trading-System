@@ -56,7 +56,7 @@ Google Drive (1000+ JSONs) → GitHub Actions → Batch Processing → GitHub Pa
 ### Core Data Transformation
 Each JSON file contains:
 - **chart.prices**: OHLCV data with timestamps, RLST ratings (0-99), and BC indicators
-- **blueDotData.dates**: Strategic trading signal dates
+- **chart.blueDotData.dates**: Strategic trading signal dates (array of date strings like "2024-11-08")
 - **peripheralData**: Stock metadata and RS ratings
 
 The system generates **4 CSV files per stock**:
@@ -88,8 +88,12 @@ The system validates:
 Processed CSVs are automatically deployed to GitHub Pages for TradingView seed data access:
 ```pine
 // Access processed data in Pine Script
-blue_dot = request.seed('username_bluedot_daily_AAPL', 'BLUE_DOTS', close)
-rlst = request.seed('username_bluedot_daily_AAPL', 'RLST_RATING', close)
+blue_dot = request.seed('stocks_chimmu_ms_daily_AAPL', 'BLUE_DOTS', close)
+rlst = request.seed('stocks_chimmu_ms_daily_AAPL', 'RLST_RATING', close)
+bc = request.seed('stocks_chimmu_ms_daily_AAPL', 'BC_INDICATOR', close)
+
+// Weekly data access
+weekly_blue_dot = request.seed('stocks_chimmu_ms_weekly_AAPL', 'BLUE_DOTS', close)
 ```
 
 ## Important Implementation Notes
@@ -112,7 +116,27 @@ rlst = request.seed('username_bluedot_daily_AAPL', 'RLST_RATING', close)
 - **Logging**: Comprehensive logging to `logs/data_processing.log`
 
 ### GitHub Actions Integration  
-- **Daily Pipeline**: Runs at 9 AM UTC (`daily-pipeline.yml`)
-- **Weekly Pipeline**: Runs Sunday 10 AM UTC (`weekly-pipeline.yml`)
+- **Daily Pipeline**: Runs at 9 AM UTC (`daily-processing.yml`)
+- **Weekly Pipeline**: Runs Sunday 10 AM UTC (`weekly-processing.yml`)
 - **Manual Triggers**: Support `workflow_dispatch` and `repository_dispatch`
-- **Timeout**: 5-hour maximum processing time per workflow
+- **Timeout**: 2-hour for daily, 3-hour for weekly processing
+- **Keep Files**: Both workflows preserve existing data when deploying to gh-pages
+
+## Recent Fixes and Updates
+
+### Blue Dot Processing Fix (Fixed)
+- Blue dot data is located at `json_data['chart']['blueDotData']['dates']` not top-level
+- Date comparison uses string format "YYYY-MM-DD" matching the blueDotData array
+- Correctly identifies and marks trading signals (e.g., 27 matching dates in sample data)
+
+### Weekly Processing Workflow (Fixed)
+- Updated `process_from_drive.py` to accept `--timeframe` and `--date` arguments
+- Unified processing script for both daily and weekly workflows
+- Fixed GitHub Pages deployment to preserve both daily and weekly folders
+
+### Current Production Configuration
+- **Service Account**: Located at `.credentials/google-drive-service-account.json`
+- **Google Drive IDs**: Daily and Weekly folder IDs configured
+- **GitHub Username**: udhaya10
+- **TradingView Namespace**: stocks_chimmu_ms
+- **Processing Capacity**: 1000+ files with 4 parallel workers

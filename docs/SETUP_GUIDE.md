@@ -24,11 +24,11 @@ This guide walks you through setting up the production-scale BlueDot Trading Sys
 ```bash
 # 1. Go to GitHub and fork this repository
 # 2. Clone your fork locally
-git clone https://github.com/YOUR_USERNAME/bluedot-trading-system.git
-cd bluedot-trading-system
+git clone https://github.com/YOUR_USERNAME/BlueDot-Trading-System.git
+cd BlueDot-Trading-System
 
 # 3. Enable GitHub Actions in your repository settings
-# 4. Enable GitHub Pages (Settings → Pages → Source: GitHub Actions)
+# 4. Enable GitHub Pages (Settings → Pages → Source: Deploy from a branch → gh-pages)
 ```
 
 ### 2. Google Drive Setup
@@ -55,12 +55,14 @@ cd bluedot-trading-system
     └── status_log.txt
 ```
 
-#### Get Google Drive API Key
+#### Create Service Account
 ```bash
 # 1. Go to Google Cloud Console
 # 2. Enable Google Drive API
-# 3. Create credentials (API Key)
-# 4. Note down your API key
+# 3. Create Service Account:
+#    - Name: bluedot-drive-access
+#    - Download JSON key file
+# 4. Share your Google Drive folders with the service account email
 ```
 
 #### Get Folder IDs
@@ -78,16 +80,23 @@ Go to your GitHub repository → Settings → Secrets and variables → Actions
 
 ```bash
 # Google Drive Integration
-GOOGLE_DRIVE_API_KEY          # Your Google Drive API key
+GOOGLE_DRIVE_SERVICE_ACCOUNT  # Base64-encoded service account JSON
 DAILY_FOLDER_ID               # Google Drive folder ID for daily data
 WEEKLY_FOLDER_ID              # Google Drive folder ID for weekly data
 
 # Notifications (Optional)
-SUCCESS_WEBHOOK_URL           # Slack/Discord webhook for success notifications
-ERROR_WEBHOOK_URL             # Slack/Discord webhook for error notifications
+SLACK_WEBHOOK_URL             # Slack webhook for notifications
+DISCORD_WEBHOOK_URL           # Discord webhook for notifications
 
-# TradingView (Optional)
+# TradingView
 TRADINGVIEW_NAMESPACE         # Your TradingView namespace for seed data
+```
+
+#### Encode Service Account JSON
+```bash
+# Base64 encode your service account JSON file:
+base64 -i google-drive-service-account.json | pbcopy  # macOS
+base64 google-drive-service-account.json | xclip      # Linux
 ```
 
 #### Setting Up Webhook Notifications (Optional)
@@ -124,20 +133,22 @@ TRADINGVIEW_NAMESPACE         # Your TradingView namespace for seed data
 #### Verify GitHub Pages Output
 ```bash
 # Check if your CSVs are accessible at:
-# https://YOUR_USERNAME.github.io/bluedot-trading-system/daily/latest/AAPL_BLUE_DOTS.csv
+# https://YOUR_USERNAME.github.io/BlueDot-Trading-System/data/daily/AAPL_BLUE_DOTS.csv
+# https://YOUR_USERNAME.github.io/BlueDot-Trading-System/data/weekly/AAPL_BLUE_DOTS.csv
 ```
 
 ## 📊 Daily Operations Workflow
 
 ### Morning Routine (Automated)
 ```bash
-# 1. Upload your 1000+ JSON files to Google Drive:
-#    📁 BlueDot-Data/daily/2024-08-02/
+# 1. Upload your JSON files to Google Drive:
+#    📁 daily/2024-11-12/
+#       ├── AAPL.json
+#       ├── MSFT.json
+#       └── ... (more files)
 #    
-# 2. Create trigger file:
-#    📄 triggers/daily_ready.txt → "2024-08-02"
-#    
-# 3. GitHub Actions automatically detects and processes
+# 2. GitHub Actions runs automatically at 9 AM UTC
+# 3. Or trigger manually from GitHub Actions tab
 # 4. Receive Slack/Discord notification when complete
 # 5. Use processed data in TradingView immediately
 ```
@@ -145,23 +156,24 @@ TRADINGVIEW_NAMESPACE         # Your TradingView namespace for seed data
 ### Weekly Routine (Automated)
 ```bash
 # 1. Upload weekly JSON files to:
-#    📁 BlueDot-Data/weekly/2024-W31/
+#    📁 weekly/2024-W46/
+#       ├── AAPL.json
+#       ├── MSFT.json
+#       └── ... (more files)
 #    
-# 2. Create trigger file:
-#    📄 triggers/weekly_ready.txt → "2024-W31"
-#    
-# 3. Weekly processing runs every Sunday automatically
+# 2. GitHub Actions runs every Sunday at 10 AM UTC
+# 3. Or trigger manually with week number (e.g., 2024-W46)
 ```
 
 ## 🎯 TradingView Integration
 
-### Upload CSV as Seed Data
+### Use GitHub Pages Data Directly
 ```bash
-# 1. Go to TradingView → Chart → Indicators
-# 2. Pine Editor → Create new script
-# 3. Use request.seed() to access your data:
+# Your data is automatically available via GitHub Pages
+# No manual upload needed - TradingView can access it directly:
 
-blue_dot = request.seed('your_namespace', 'AAPL_BLUE_DOTS', close)
+blue_dot = request.seed('your_namespace_daily_AAPL', 'BLUE_DOTS', close)
+rlst = request.seed('your_namespace_daily_AAPL', 'RLST_RATING', close)
 ```
 
 ### Pine Script Template
@@ -174,7 +186,7 @@ symbol_input = input.string("AAPL", "Stock Symbol")
 timeframe_input = input.string("daily", "Timeframe", options=["daily", "weekly"])
 
 // Dynamic data access
-namespace = "yourusername_bluedot_" + timeframe_input + "_" + symbol_input
+namespace = "your_namespace_" + timeframe_input + "_" + symbol_input
 blue_dot = request.seed(namespace, 'BLUE_DOTS', close)
 rlst = request.seed(namespace, 'RLST_RATING', close)
 bc = request.seed(namespace, 'BC_INDICATOR', close)

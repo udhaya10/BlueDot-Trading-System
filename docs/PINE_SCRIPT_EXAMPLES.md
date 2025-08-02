@@ -2,18 +2,29 @@
 
 This guide shows how to use the processed CSV data in TradingView using Pine Script.
 
+## Automation Schedule
+
+The system automatically processes data at:
+- **Daily Processing**: 9:00 AM UTC every day (4 AM EST / 1 AM PST / 2:30 PM IST)
+- **Weekly Processing**: 10:00 AM UTC every Sunday (5 AM EST / 2 AM PST / 3:30 PM IST)
+- **Manual Trigger**: Available anytime via GitHub Actions tab
+
 ## Dataset Naming Convention
 
 All datasets follow this format:
 ```
-namespace_timeframe_SYMBOL_DATATYPE
+namespace_timeframe_SYMBOL
 ```
 
 Where:
 - **namespace**: `stocks_chimmu_ms` (your configured namespace)
 - **timeframe**: `daily` or `weekly`
 - **SYMBOL**: Stock symbol (e.g., AAPL, MSFT)
-- **DATATYPE**: `PRICE_DATA`, `RLST_RATING`, `BC_INDICATOR`, or `BLUE_DOTS`
+
+Each dataset contains columns:
+- **BLUE_DOTS**: Binary trading signals (1=signal, 0=no signal)
+- **RLST_RATING**: Relative Strength ratings (0-99)
+- **BC_INDICATOR**: Base Count consolidation strength
 
 ## 1. RLST Rating Indicator
 
@@ -25,8 +36,8 @@ indicator("RLST Rating", overlay=false)
 
 // Request RLST data
 rlst_data = request.seed(
-    dataset="stocks_chimmu_ms_daily_AAPL_RLST_RATING",
-    symbol="RLST",
+    dataset="stocks_chimmu_ms_daily_AAPL",
+    symbol="RLST_RATING",
     close
 )
 
@@ -58,8 +69,8 @@ indicator("Blue Dot Signals", overlay=true)
 
 // Request blue dot data
 blue_dots = request.seed(
-    dataset="stocks_chimmu_ms_daily_AAPL_BLUE_DOTS",
-    symbol="DOTS",
+    dataset="stocks_chimmu_ms_daily_AAPL",
+    symbol="BLUE_DOTS",
     close
 )
 
@@ -97,8 +108,8 @@ indicator("BC Indicator", overlay=false)
 
 // Request BC data
 bc_data = request.seed(
-    dataset="stocks_chimmu_ms_daily_AAPL_BC_INDICATOR",
-    symbol="BC",
+    dataset="stocks_chimmu_ms_daily_AAPL",
+    symbol="BC_INDICATOR",
     close
 )
 
@@ -124,15 +135,13 @@ indicator("BlueDot Complete System", overlay=true)
 // Input for symbol selection
 symbol_input = input.string("AAPL", title="Stock Symbol")
 
-// Construct dataset names
-rlst_dataset = "stocks_chimmu_ms_daily_" + symbol_input + "_RLST_RATING"
-bc_dataset = "stocks_chimmu_ms_daily_" + symbol_input + "_BC_INDICATOR"
-dots_dataset = "stocks_chimmu_ms_daily_" + symbol_input + "_BLUE_DOTS"
+// Construct dataset name
+dataset_name = "stocks_chimmu_ms_daily_" + symbol_input
 
-// Request all data
-rlst = request.seed(rlst_dataset, "RLST", close)
-bc = request.seed(bc_dataset, "BC", close)
-blue_dots = request.seed(dots_dataset, "DOTS", close)
+// Request all data from the same dataset
+rlst = request.seed(dataset_name, "RLST_RATING", close)
+bc = request.seed(dataset_name, "BC_INDICATOR", close)
+blue_dots = request.seed(dataset_name, "BLUE_DOTS", close)
 
 // Color bars based on RLST strength
 barcolor(rlst >= 80 ? color.green : 
@@ -181,15 +190,15 @@ symbol = "AAPL"
 
 // Daily RLST
 daily_rlst = request.seed(
-    "stocks_chimmu_ms_daily_" + symbol + "_RLST_RATING",
-    "RLST",
+    "stocks_chimmu_ms_daily_" + symbol,
+    "RLST_RATING",
     close
 )
 
 // Weekly RLST
 weekly_rlst = request.seed(
-    "stocks_chimmu_ms_weekly_" + symbol + "_RLST_RATING",
-    "RLST",
+    "stocks_chimmu_ms_weekly_" + symbol,
+    "RLST_RATING",
     close
 )
 
@@ -220,8 +229,9 @@ for i = 0 to array.size(symbols) - 1
     sym = array.get(symbols, i)
     
     // Get RLST and Blue Dots for this symbol
-    rlst = request.seed("stocks_chimmu_ms_daily_" + sym + "_RLST_RATING", "RLST", close)
-    dots = request.seed("stocks_chimmu_ms_daily_" + sym + "_BLUE_DOTS", "DOTS", close)
+    dataset = "stocks_chimmu_ms_daily_" + sym
+    rlst = request.seed(dataset, "RLST_RATING", close)
+    dots = request.seed(dataset, "BLUE_DOTS", close)
     
     // Check conditions
     if rlst >= 80 and dots == 1

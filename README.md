@@ -1,22 +1,21 @@
 # BlueDot Trading System
 
 ## Overview
-**Production-scale automated trading pipeline** that processes 1000+ JSON files daily/weekly with zero manual intervention. Upload your market data to Google Drive in the morning, and get 4000+ processed CSV files ready for TradingView trading strategies by the time markets open.
+**Production-scale automated trading pipeline** that processes 1000+ JSON files daily/weekly with zero manual intervention. Upload your market data to Google Drive, and get 4000+ processed CSV files ready for TradingView trading strategies automatically.
 
 ### 🎯 **Built for Scale**
 - **Daily Pipeline**: 1000+ JSON → 4000+ CSV files (automated)
 - **Weekly Pipeline**: 1000+ JSON → 4000+ CSV files (automated)
 - **Zero Downtime**: Cloud-native architecture with GitHub Actions
-- **Real-time Notifications**: Slack/Discord alerts for processing status
+- **Real-time Access**: GitHub Pages hosting for immediate TradingView access
 
-## 🎯 Objective
-**Production-scale automated trading system** that processes 1000+ JSON files daily/weekly, converting complex market data (price history, relative strength ratings, base counts, and blue dot signals) into TradingView-compatible CSV format for Pine Script strategy development.
-
-### 🚀 **Scale & Automation**
-- **Daily Processing**: 1000+ JSON files → 4000+ CSV files automatically
-- **Weekly Processing**: 1000+ JSON files → 4000+ CSV files automatically  
-- **Cloud Integration**: Google Drive upload → GitHub Actions → TradingView
-- **Zero Manual Work**: Upload JSONs in morning → Automated processing → Ready for trading
+## 🎯 Current Configuration
+**Live production system** processing market data with the following setup:
+- **Google Drive Folders**: 
+  - Daily: `1-L9PF0zZqtalEHdVPkHLeGDAyuvN5MUo`
+  - Weekly: `1-LY72Ml_FXr5SJK8wCySlSMB78OU6gM4`
+- **TradingView Namespace**: `stocks_chimmu_ms`
+- **GitHub Pages**: https://udhaya10.github.io/BlueDot-Trading-System/
 
 ## 📅 Automation Schedule
 
@@ -112,8 +111,9 @@ python src/batch_processing/batch_processor.py --timeframe daily --date 2024-08-
 ### 3. TradingView Integration (Automated)
 ```pine
 // Access your processed data (auto-updated daily)
-blue_dot = request.seed('stocks_chimmu_ms_daily_AAPL_BLUE_DOTS', 'DOTS', close)
-rlst = request.seed('stocks_chimmu_ms_daily_AAPL_RLST_RATING', 'RLST', close)
+blue_dot = request.seed('stocks_chimmu_ms_daily_AAPL', 'BLUE_DOTS', close)
+rlst = request.seed('stocks_chimmu_ms_daily_AAPL', 'RLST_RATING', close)
+bc = request.seed('stocks_chimmu_ms_daily_AAPL', 'BC_INDICATOR', close)
 ```
 
 ## 📈 Production Trading Integration
@@ -131,9 +131,9 @@ timeframe_input = input.string("daily", "Timeframe", options=["daily", "weekly"]
 
 // Dynamic data access (auto-updated daily)
 namespace = "stocks_chimmu_ms_" + timeframe_input + "_" + symbol_input
-blue_dot = request.seed(namespace + "_BLUE_DOTS", 'DOTS', close)
-rlst = request.seed(namespace + "_RLST_RATING", 'RLST', close)  
-bc = request.seed(namespace + "_BC_INDICATOR", 'BC', close)
+blue_dot = request.seed(namespace, 'BLUE_DOTS', close)
+rlst = request.seed(namespace, 'RLST_RATING', close)  
+bc = request.seed(namespace, 'BC_INDICATOR', close)
 
 // Production-grade signal logic
 bc_strengthening = bc > bc[5]  // BC trend analysis

@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/udhaya10/workspace/TradingStratergies/bluedot-trading-system/venv"
+set -gx VIRTUAL_ENV "/Users/udhaya10/workspace/BlueDot-Trading-System/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

@@ -75,7 +75,18 @@ jobs:
     - name: 🔍 Verify Output
       run: |
         echo "Checking output directory..."
+        echo "=== Directory contents ==="
         ls -la data/output/weekly/${{ steps.week.outputs.WEEK }}/ || echo "No output found"
+        echo "=== CSV files found ==="
+        find data/output/weekly/${{ steps.week.outputs.WEEK }} -name "*.csv" -type f || echo "No CSV files found"
+        echo "=== File contents preview ==="
+        for file in data/output/weekly/${{ steps.week.outputs.WEEK }}/*.csv; do
+          if [ -f "$file" ]; then
+            echo "File: $file"
+            head -3 "$file"
+            echo "---"
+          fi
+        done
         
     - name: 📊 Prepare GitHub Pages Deployment
       if: success()

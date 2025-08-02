@@ -248,6 +248,10 @@ class BatchProcessor:
         )
         csv_outputs['BLUE_DOTS'] = blue_dot_signals
         
+        # Log the size of each CSV output
+        for key, data in csv_outputs.items():
+            self.logger.info(f"CSV output {key}: {len(data)} rows")
+        
         return csv_outputs
     
     def _convert_timestamp(self, timestamp_ms: int) -> str:
@@ -327,11 +331,19 @@ class BatchProcessor:
                 
                 # Write CSV data
                 csv_data = csv_outputs[csv_key]
+                self.logger.info(f"Writing {filename} to {file_path}")
+                self.logger.info(f"CSV data has {len(csv_data)} rows")
+                
                 with open(file_path, 'w') as f:
                     for row in csv_data:
                         f.write(','.join(map(str, row)) + '\n')
                 
-                self.logger.info(f"Saved {filename} with {len(csv_data)} rows")
+                # Verify file was written
+                if file_path.exists():
+                    file_size = file_path.stat().st_size
+                    self.logger.info(f"✓ Saved {filename} with {len(csv_data)} rows ({file_size} bytes)")
+                else:
+                    self.logger.error(f"✗ Failed to save {filename}")
 
 
 if __name__ == "__main__":

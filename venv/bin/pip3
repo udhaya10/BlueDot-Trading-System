@@ -1,4 +1,4 @@
-#!/Users/udhaya10/workspace/TradingStratergies/bluedot-trading-system/venv/bin/python3.12
+#!/Users/udhaya10/workspace/BlueDot-Trading-System/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys

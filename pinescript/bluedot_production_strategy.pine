@@ -1,0 +1,210 @@
+//@version=5
+strategy("BlueDot Production Strategy", overlay=true, 
+         initial_capital=100000, 
+         default_qty_type=strategy.percent_of_equity, 
+         default_qty_value=10,
+         commission_type=strategy.commission.percent,
+         commission_value=0.1)
+
+// === INPUT PARAMETERS ===
+var string symbol_input = input.string("AAPL", "Stock Symbol", group="Data Source")
+var string timeframe_input = input.string("daily", "Timeframe", options=["daily", "weekly"], group="Data Source")
+
+// Strategy Parameters
+var int rlst_threshold = input.int(80, "RLST Buy Threshold", minval=50, maxval=99, group="Strategy Settings")
+var int rlst_sell_threshold = input.int(30, "RLST Sell Threshold", minval=10, maxval=50, group="Strategy Settings")
+var int bc_threshold = input.int(25000, "BC Minimum Threshold", minval=10000, maxval=50000, group="Strategy Settings")
+var bool use_bc_trend = input.bool(true, "Use BC Trend Filter", group="Strategy Settings")
+var int bc_trend_period = input.int(5, "BC Trend Period", minval=1, maxval=20, group="Strategy Settings")
+
+// Risk Management
+var bool use_stop_loss = input.bool(true, "Use Stop Loss", group="Risk Management")
+var float stop_loss_pct = input.float(5.0, "Stop Loss %", minval=1.0, maxval=20.0, group="Risk Management")
+var bool use_trailing_stop = input.bool(true, "Use Trailing Stop", group="Risk Management")
+var float trailing_stop_pct = input.float(3.0, "Trailing Stop %", minval=1.0, maxval=20.0, group="Risk Management")
+
+// === DATA ACCESS ===
+// Construct namespace for your data
+namespace = "stocks_chimmu_ms_" + timeframe_input + "_" + symbol_input
+
+// Request all data streams
+blue_dot = request.seed(namespace, 'BLUE_DOTS', close)
+rlst = request.seed(namespace, 'RLST_RATING', close)
+bc = request.seed(namespace, 'BC_INDICATOR', close)
+
+// === INDICATORS ===
+// Calculate BC trend
+bc_sma = ta.sma(bc, bc_trend_period)
+bc_strengthening = bc > bc_sma
+
+// RLST momentum
+rlst_sma = ta.sma(rlst, 20)
+rlst_momentum = rlst > rlst_sma
+
+// Price action
+price_sma20 = ta.sma(close, 20)
+price_sma50 = ta.sma(close, 50)
+price_above_ma = close > price_sma20 and price_sma20 > price_sma50
+
+// Volume analysis
+volume_sma = ta.sma(volume, 20)
+high_volume = volume > volume_sma * 1.5
+
+// === ENTRY CONDITIONS ===
+// Primary buy signal: Blue dot with strong RLST and BC
+primary_buy = blue_dot == 1 and 
+              rlst >= rlst_threshold and 
+              bc > bc_threshold and 
+              (not use_bc_trend or bc_strengthening)
+
+// Secondary buy signal: Strong RLST breakout without blue dot
+secondary_buy = rlst >= 85 and 
+                ta.crossover(rlst, rlst_threshold) and 
+                bc > bc_threshold and 
+                price_above_ma and 
+                high_volume
+
+// Combined buy signal
+buy_signal = primary_buy or secondary_buy
+
+// === EXIT CONDITIONS ===
+// Exit on weak RLST
+rlst_exit = rlst < rlst_sell_threshold
+
+// Exit on BC breakdown
+bc_breakdown = bc < bc[bc_trend_period] * 0.95
+
+// Exit on price breakdown
+price_breakdown = close < price_sma50
+
+// Combined exit signal
+exit_signal = rlst_exit or bc_breakdown or price_breakdown
+
+// === POSITION SIZING ===
+position_size = strategy.equity * 0.1 / close  // 10% of equity per position
+
+// === STRATEGY EXECUTION ===
+// Entry logic
+if buy_signal and strategy.position_size == 0
+    entry_comment = primary_buy ? "BlueDot Entry" : "RLST Breakout"
+    strategy.entry("Long", strategy.long, qty=position_size, comment=entry_comment)
+    
+    // Set stop loss
+    if use_stop_loss
+        stop_price = close * (1 - stop_loss_pct / 100)
+        strategy.exit("Stop Loss", from_entry="Long", stop=stop_price)
+
+// Update trailing stop
+if strategy.position_size > 0 and use_trailing_stop
+    trail_offset = close * (trailing_stop_pct / 100)
+    strategy.exit("Trailing Stop", from_entry="Long", trail_offset=trail_offset, trail_price=close)
+
+// Exit logic
+if exit_signal and strategy.position_size > 0
+    exit_comment = rlst_exit ? "RLST Exit" : bc_breakdown ? "BC Exit" : "Price Exit"
+    strategy.close("Long", comment=exit_comment)
+
+// === VISUAL ELEMENTS ===
+// Plot buy/sell signals
+plotshape(buy_signal and strategy.position_size == 0, 
+          title="Buy Signal", 
+          style=shape.triangleup, 
+          location=location.belowbar, 
+          color=color.green, 
+          size=size.small)
+
+plotshape(exit_signal and strategy.position_size > 0, 
+          title="Sell Signal", 
+          style=shape.triangledown, 
+          location=location.abovebar, 
+          color=color.red, 
+          size=size.small)
+
+// Plot blue dots
+plotshape(blue_dot == 1, 
+          title="Blue Dot", 
+          style=shape.circle, 
+          location=location.belowbar, 
+          color=color.blue, 
+          size=size.tiny)
+
+// Background color based on RLST strength
+bgcolor(rlst >= 90 ? color.new(color.green, 95) : 
+        rlst >= 80 ? color.new(color.green, 97) : 
+        rlst >= 70 ? color.new(color.yellow, 97) : 
+        rlst < 30 ? color.new(color.red, 97) : na)
+
+// Plot moving averages
+plot(price_sma20, "SMA 20", color=color.orange, linewidth=1)
+plot(price_sma50, "SMA 50", color=color.blue, linewidth=1)
+
+// === INFORMATION TABLE ===
+var table info_table = table.new(position.top_right, 4, 6, 
+                                 bgcolor=color.new(color.black, 85),
+                                 border_width=1)
+
+if barstate.islast
+    // Headers
+    table.cell(info_table, 0, 0, "Metric", text_color=color.white, bgcolor=color.gray)
+    table.cell(info_table, 1, 0, "Value", text_color=color.white, bgcolor=color.gray)
+    table.cell(info_table, 2, 0, "Signal", text_color=color.white, bgcolor=color.gray)
+    table.cell(info_table, 3, 0, "Status", text_color=color.white, bgcolor=color.gray)
+    
+    // RLST Rating
+    table.cell(info_table, 0, 1, "RLST", text_color=color.white)
+    table.cell(info_table, 1, 1, str.tostring(rlst, "#"), text_color=color.white)
+    rlst_color = rlst >= 80 ? color.green : rlst >= 50 ? color.yellow : color.red
+    table.cell(info_table, 2, 1, rlst >= 80 ? "Strong" : rlst >= 50 ? "Neutral" : "Weak", 
+               bgcolor=rlst_color)
+    table.cell(info_table, 3, 1, rlst >= rlst_threshold ? "✓" : "✗", 
+               text_color=rlst >= rlst_threshold ? color.green : color.red)
+    
+    // BC Indicator
+    table.cell(info_table, 0, 2, "BC", text_color=color.white)
+    table.cell(info_table, 1, 2, str.tostring(bc, "#,###"), text_color=color.white)
+    bc_color = bc_strengthening ? color.green : color.orange
+    table.cell(info_table, 2, 2, bc_strengthening ? "Rising" : "Falling", bgcolor=bc_color)
+    table.cell(info_table, 3, 2, bc > bc_threshold ? "✓" : "✗", 
+               text_color=bc > bc_threshold ? color.green : color.red)
+    
+    // Blue Dot
+    table.cell(info_table, 0, 3, "Blue Dot", text_color=color.white)
+    table.cell(info_table, 1, 3, blue_dot == 1 ? "Active" : "None", text_color=color.white)
+    table.cell(info_table, 2, 3, blue_dot == 1 ? "BUY" : "-", 
+               bgcolor=blue_dot == 1 ? color.blue : color.gray)
+    table.cell(info_table, 3, 3, blue_dot == 1 ? "✓" : "-", 
+               text_color=blue_dot == 1 ? color.blue : color.gray)
+    
+    // Position Status
+    table.cell(info_table, 0, 4, "Position", text_color=color.white)
+    pos_size = strategy.position_size
+    table.cell(info_table, 1, 4, pos_size > 0 ? "Long" : "None", text_color=color.white)
+    table.cell(info_table, 2, 4, str.tostring(pos_size, "#,###"), text_color=color.white)
+    pos_pnl = strategy.openprofit
+    pnl_color = pos_pnl > 0 ? color.green : pos_pnl < 0 ? color.red : color.gray
+    table.cell(info_table, 3, 4, str.tostring(pos_pnl, "$#,###.##"), bgcolor=pnl_color)
+    
+    // Overall Signal
+    table.cell(info_table, 0, 5, "Action", text_color=color.white)
+    action = buy_signal and pos_size == 0 ? "BUY" : 
+             exit_signal and pos_size > 0 ? "SELL" : 
+             pos_size > 0 ? "HOLD" : "WAIT"
+    action_color = action == "BUY" ? color.green : 
+                   action == "SELL" ? color.red : 
+                   action == "HOLD" ? color.blue : color.gray
+    table.cell(info_table, 1, 5, action, bgcolor=action_color, text_color=color.white)
+    table.cell(info_table, 2, 5, "", bgcolor=color.gray)
+    table.cell(info_table, 3, 5, "", bgcolor=color.gray)
+
+// === ALERTS ===
+alertcondition(buy_signal and strategy.position_size == 0, 
+               title="Buy Alert", 
+               message="BlueDot Buy Signal: {{ticker}} - RLST={{plot_1}}, BC={{plot_2}}")
+
+alertcondition(exit_signal and strategy.position_size > 0, 
+               title="Sell Alert", 
+               message="Exit Signal: {{ticker}} - RLST={{plot_1}}, BC={{plot_2}}")
+
+alertcondition(blue_dot == 1, 
+               title="Blue Dot Alert", 
+               message="Blue Dot Signal: {{ticker}}")

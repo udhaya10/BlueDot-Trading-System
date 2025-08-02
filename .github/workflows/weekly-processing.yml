@@ -88,14 +88,14 @@ jobs:
           fi
         done
         
-    - name: 📊 Prepare GitHub Pages Deployment
+        
+    - name: 📋 Pre-deployment Check
       if: success()
       run: |
-        mkdir -p docs/data/weekly
-        if [ -d "data/output/weekly/${{ steps.week.outputs.WEEK }}" ]; then
-          cp -r data/output/weekly/${{ steps.week.outputs.WEEK }}/* docs/data/weekly/
-          echo "Copied $(ls -1 data/output/weekly/${{ steps.week.outputs.WEEK }}/*.csv | wc -l) CSV files"
-        fi
+        echo "=== Files to deploy ==="
+        ls -la data/output/weekly/${{ steps.week.outputs.WEEK }}/
+        echo "=== File timestamps ==="
+        stat data/output/weekly/${{ steps.week.outputs.WEEK }}/*.csv || true
         
     - name: 🚀 Deploy to GitHub Pages
       if: success()
@@ -106,6 +106,8 @@ jobs:
         publish_dir: ./data/output/weekly/${{ steps.week.outputs.WEEK }}
         destination_dir: data/weekly
         keep_files: true
+        force_orphan: false
+        commit_message: "Deploy weekly data for ${{ steps.week.outputs.WEEK }}"
         
     - name: 📊 Generate Summary
       if: always()

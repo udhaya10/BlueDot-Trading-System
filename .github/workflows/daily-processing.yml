@@ -87,14 +87,14 @@ jobs:
           fi
         done
         
-    - name: 📊 Prepare GitHub Pages Deployment
+        
+    - name: 📋 Pre-deployment Check
       if: success()
       run: |
-        mkdir -p docs/data/daily
-        if [ -d "data/output/daily/${{ steps.date.outputs.DATE }}" ]; then
-          cp -r data/output/daily/${{ steps.date.outputs.DATE }}/* docs/data/daily/
-          echo "Copied $(ls -1 data/output/daily/${{ steps.date.outputs.DATE }}/*.csv | wc -l) CSV files"
-        fi
+        echo "=== Files to deploy ==="
+        ls -la data/output/daily/${{ steps.date.outputs.DATE }}/
+        echo "=== File timestamps ==="
+        stat data/output/daily/${{ steps.date.outputs.DATE }}/*.csv || true
         
     - name: 🚀 Deploy to GitHub Pages
       if: success()
@@ -105,6 +105,8 @@ jobs:
         publish_dir: ./data/output/daily/${{ steps.date.outputs.DATE }}
         destination_dir: data/daily
         keep_files: true
+        force_orphan: false
+        commit_message: "Deploy daily data for ${{ steps.date.outputs.DATE }}"
         
     - name: 📊 Generate Summary
       if: always()

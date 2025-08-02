@@ -68,77 +68,9 @@ jobs:
         fi
         echo "Processing week: $(cat $GITHUB_OUTPUT)"
         
-    - name: 📥 Process Weekly Data
+    - name: 📥 Download and Process Weekly Data
       run: |
-        # Create a modified version of process_from_drive.py for weekly
-        python -c "
-        import os
-        import sys
-        import json
-        import io
-        from datetime import datetime
-        from google.oauth2 import service_account
-        from googleapiclient.discovery import build
-        from googleapiclient.http import MediaIoBaseDownload
-        from dotenv import load_dotenv
-        import subprocess
-        
-        load_dotenv()
-        
-        # Download from weekly folder
-        service_account_file = os.getenv('GOOGLE_DRIVE_SERVICE_ACCOUNT')
-        folder_id = os.getenv('WEEKLY_FOLDER_ID')
-        week_str = '${{ steps.week.outputs.WEEK }}'
-        
-        print(f'Processing weekly data for {week_str}')
-        
-        credentials = service_account.Credentials.from_service_account_file(
-            service_account_file,
-            scopes=['https://www.googleapis.com/auth/drive.readonly']
-        )
-        
-        service = build('drive', 'v3', credentials=credentials)
-        local_dir = f'data/raw/weekly/{week_str}'
-        os.makedirs(local_dir, exist_ok=True)
-        
-        # Download files
-        results = service.files().list(
-            q=f\"'{folder_id}' in parents\",
-            pageSize=1000,
-            fields='files(id, name, size)'
-        ).execute()
-        
-        files = results.get('files', [])
-        print(f'Found {len(files)} files')
-        
-        for file in files:
-            if file['name'].endswith('.json'):
-                print(f'Downloading: {file[\"name\"]}')
-                request = service.files().get_media(fileId=file['id'])
-                file_path = os.path.join(local_dir, file['name'])
-                
-                fh = io.BytesIO()
-                downloader = MediaIoBaseDownload(fh, request)
-                done = False
-                while done is False:
-                    status, done = downloader.next_chunk()
-                
-                with open(file_path, 'wb') as f:
-                    f.write(fh.getvalue())
-        
-        # Process the batch
-        result = subprocess.run([
-            sys.executable,
-            'src/batch_processing/batch_processor.py',
-            '--timeframe', 'weekly',
-            '--date', week_str
-        ], capture_output=True, text=True)
-        
-        print(result.stdout)
-        if result.returncode != 0:
-            print(result.stderr)
-            sys.exit(1)
-        "
+        python process_from_drive.py --timeframe weekly --date ${{ steps.week.outputs.WEEK }}
         
     - name: 🔍 Verify Output
       run: |

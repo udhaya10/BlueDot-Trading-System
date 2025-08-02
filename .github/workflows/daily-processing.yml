@@ -69,7 +69,7 @@ jobs:
         
     - name: 📥 Download and Process Daily Data
       run: |
-        python process_from_drive.py
+        python process_from_drive.py --timeframe daily --date ${{ steps.date.outputs.DATE }}
         
     - name: 🔍 Verify Output
       run: |

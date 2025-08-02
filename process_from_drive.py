@@ -114,20 +114,31 @@ def main():
     print("🚀 BlueDot Trading System - Google Drive Processing")
     print("=" * 60)
     
-    # Process daily data
-    timeframe = 'daily'
-    date_str = '2024-08-02'  # Use a specific date for testing
+    # Parse command line arguments
+    import argparse
+    parser = argparse.ArgumentParser(description='Process files from Google Drive')
+    parser.add_argument('--timeframe', default='daily', choices=['daily', 'weekly'],
+                        help='Timeframe to process')
+    parser.add_argument('--date', help='Date or week to process (YYYY-MM-DD or YYYY-WXX)')
+    args = parser.parse_args()
+    
+    # Set defaults based on timeframe
+    if not args.date:
+        if args.timeframe == 'daily':
+            args.date = datetime.now().strftime('%Y-%m-%d')
+        else:  # weekly
+            args.date = datetime.now().strftime('%Y-W%V')
     
     # Download files
-    local_dir, count = download_files_from_drive(timeframe, date_str)
+    local_dir, count = download_files_from_drive(args.timeframe, args.date)
     
     if count > 0:
         # Process the batch
-        success = process_batch(timeframe, date_str)
+        success = process_batch(args.timeframe, args.date)
         
         if success:
             # Check output
-            output_dir = f"data/output/{timeframe}/{date_str}"
+            output_dir = f"data/output/{args.timeframe}/{args.date}"
             if os.path.exists(output_dir):
                 csv_files = [f for f in os.listdir(output_dir) if f.endswith('.csv')]
                 print(f"\n📊 Generated {len(csv_files)} CSV files:")

@@ -189,8 +189,8 @@ class BatchProcessor:
                     return False
         
         # Check blueDotData structure
-        if 'blueDotData' in json_data:
-            if 'dates' not in json_data['blueDotData']:
+        if 'blueDotData' in json_data.get('chart', {}):
+            if 'dates' not in json_data['chart']['blueDotData']:
                 return False
         
         return True
@@ -243,7 +243,7 @@ class BatchProcessor:
         
         # Process blue dot signals
         blue_dot_signals = self._generate_blue_dot_signals(
-            json_data.get('blueDotData', {}), 
+            json_data.get('chart', {}).get('blueDotData', {}), 
             prices
         )
         csv_outputs['BLUE_DOTS'] = blue_dot_signals

@@ -146,6 +146,11 @@ class BatchProcessor:
             with open(file_path, 'r') as f:
                 json_data = json.load(f)
             
+            # Log JSON structure
+            self.logger.info(f"JSON top-level keys: {list(json_data.keys())}")
+            if 'chart' in json_data:
+                self.logger.info(f"Chart keys: {list(json_data['chart'].keys())}")
+            
             # Validate JSON structure
             if not self._validate_json_structure(json_data):
                 return {"success": False, "error": "Invalid JSON structure"}
@@ -205,9 +210,18 @@ class BatchProcessor:
         }
         
         # Process price data (OHLCV + RLST + BC)
+        if 'chart' not in json_data:
+            self.logger.error("No 'chart' key in JSON data")
+            return csv_outputs
+            
+        if 'prices' not in json_data['chart']:
+            self.logger.error("No 'prices' key in chart data")
+            return csv_outputs
+            
         prices = json_data['chart']['prices']
+        self.logger.info(f"Processing {len(prices)} price records")
         
-        for price_record in prices:
+        for i, price_record in enumerate(prices):
             # Convert timestamp
             timestamp = self._convert_timestamp(price_record['priceDate'])
             
@@ -251,6 +265,7 @@ class BatchProcessor:
         # Log the size of each CSV output
         for key, data in csv_outputs.items():
             self.logger.info(f"CSV output {key}: {len(data)} rows")
+            print(f"CSV output {key}: {len(data)} rows")  # Also print to console
         
         return csv_outputs
     
@@ -324,6 +339,7 @@ class BatchProcessor:
                 continue
                 
             self.logger.info(f"Processing {data_type} -> {csv_key}")
+            print(f"Processing {data_type} -> {csv_key}")  # Print to console
             if csv_key in csv_outputs:
                 # Generate filename: SYMBOL_FILE_TYPE.csv
                 filename = f"{symbol}_{file_suffix}"

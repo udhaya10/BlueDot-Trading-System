@@ -219,41 +219,60 @@ class BatchProcessor:
             return csv_outputs
             
         prices = json_data['chart']['prices']
+        print(f"Type of prices: {type(prices)}")
+        print(f"Prices value: {prices[:2] if isinstance(prices, list) and len(prices) > 2 else prices}")
+        
+        # Check if prices is actually a list
+        if not isinstance(prices, list):
+            self.logger.error(f"Prices is not a list, it's a {type(prices)}")
+            return csv_outputs
+            
         self.logger.info(f"Processing {len(prices)} price records")
+        print(f"Processing {len(prices)} price records")
+        
+        # Debug: Check first price record structure
+        if prices and len(prices) > 0:
+            print(f"First price record keys: {list(prices[0].keys())}")
+            print(f"Sample price record: {prices[0]}")
         
         for i, price_record in enumerate(prices):
-            # Convert timestamp
-            timestamp = self._convert_timestamp(price_record['priceDate'])
-            
-            # PRICE_DATA.csv - Standard OHLCV
-            csv_outputs['PRICE_DATA'].append([
-                timestamp,
-                price_record.get('open', 0),
-                price_record.get('high', 0),
-                price_record.get('low', 0),
-                price_record.get('close', 0),
-                price_record.get('volume', 0)
-            ])
-            
-            # RLST_RATING.csv - Time-aligned RLST
-            csv_outputs['RLST_RATING'].append([
-                timestamp,
-                0,  # Open (0 for indicators)
-                1000,  # High (1000 for indicators)
-                0,  # Low (0 for indicators)
-                price_record.get('rlst', 0),  # Close (RLST value)
-                0   # Volume (0 for indicators)
-            ])
-            
-            # BC_INDICATOR.csv - Time-aligned BC
-            csv_outputs['BC_INDICATOR'].append([
-                timestamp,
-                0,  # Open
-                1000,  # High
-                0,  # Low
-                price_record.get('bc', 0),  # Close (BC value)
-                0   # Volume
-            ])
+            try:
+                # Convert timestamp
+                timestamp = self._convert_timestamp(price_record['priceDate'])
+                
+                # PRICE_DATA.csv - Standard OHLCV
+                csv_outputs['PRICE_DATA'].append([
+                    timestamp,
+                    price_record.get('open', 0),
+                    price_record.get('high', 0),
+                    price_record.get('low', 0),
+                    price_record.get('close', 0),
+                    price_record.get('volume', 0)
+                ])
+                
+                # RLST_RATING.csv - Time-aligned RLST
+                csv_outputs['RLST_RATING'].append([
+                    timestamp,
+                    0,  # Open (0 for indicators)
+                    1000,  # High (1000 for indicators)
+                    0,  # Low (0 for indicators)
+                    price_record.get('rlst', 0),  # Close (RLST value)
+                    0   # Volume (0 for indicators)
+                ])
+                
+                # BC_INDICATOR.csv - Time-aligned BC
+                csv_outputs['BC_INDICATOR'].append([
+                    timestamp,
+                    0,  # Open
+                    1000,  # High
+                    0,  # Low
+                    price_record.get('bc', 0),  # Close (BC value)
+                    0   # Volume
+                ])
+            except Exception as e:
+                print(f"Error processing price record {i}: {e}")
+                print(f"Price record: {price_record}")
+                self.logger.error(f"Error processing price record {i}: {e}")
         
         # Process blue dot signals
         blue_dot_signals = self._generate_blue_dot_signals(

@@ -93,7 +93,7 @@ jobs:
         publish_branch: gh-pages
         publish_dir: ./data/output/daily/${{ steps.date.outputs.DATE }}
         destination_dir: data/daily
-        keep_files: false
+        keep_files: true
         
     - name: 📊 Generate Summary
       if: always()

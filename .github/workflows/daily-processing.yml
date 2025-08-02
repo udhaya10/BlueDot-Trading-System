@@ -53,6 +53,8 @@ jobs:
         PROCESSING_MODE=production
         MAX_FILES_PER_BATCH=100
         PARALLEL_WORKERS=4
+        SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}
+        DISCORD_WEBHOOK_URL=${{ secrets.DISCORD_WEBHOOK_URL }}
         EOF
         
     - name: 📅 Set Processing Date

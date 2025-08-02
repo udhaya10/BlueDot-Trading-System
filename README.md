@@ -112,8 +112,8 @@ python src/batch_processing/batch_processor.py --timeframe daily --date 2024-08-
 ### 3. TradingView Integration (Automated)
 ```pine
 // Access your processed data (auto-updated daily)
-blue_dot = request.seed('yourusername_bluedot', 'AAPL_BLUE_DOTS', close)
-rlst = request.seed('yourusername_bluedot', 'AAPL_RLST_RATING', close)
+blue_dot = request.seed('stocks_chimmu_ms_daily_AAPL_BLUE_DOTS', 'DOTS', close)
+rlst = request.seed('stocks_chimmu_ms_daily_AAPL_RLST_RATING', 'RLST', close)
 ```
 
 ## 📈 Production Trading Integration
@@ -130,10 +130,10 @@ symbol_input = input.string("AAPL", "Stock Symbol")
 timeframe_input = input.string("daily", "Timeframe", options=["daily", "weekly"])
 
 // Dynamic data access (auto-updated daily)
-namespace = "yourusername_bluedot_" + timeframe_input + "_" + symbol_input
-blue_dot = request.seed(namespace, 'BLUE_DOTS', close)
-rlst = request.seed(namespace, 'RLST_RATING', close)  
-bc = request.seed(namespace, 'BC_INDICATOR', close)
+namespace = "stocks_chimmu_ms_" + timeframe_input + "_" + symbol_input
+blue_dot = request.seed(namespace + "_BLUE_DOTS", 'DOTS', close)
+rlst = request.seed(namespace + "_RLST_RATING", 'RLST', close)  
+bc = request.seed(namespace + "_BC_INDICATOR", 'BC', close)
 
 // Production-grade signal logic
 bc_strengthening = bc > bc[5]  // BC trend analysis

@@ -1,0 +1,132 @@
+# BlueDot Trading System - Production Data Configuration
+
+# Data Sources (Production Scale)
+data_sources:
+  input_path: "data/raw/"
+  output_path: "data/output/"
+  sample_files:
+    weekly: "sample_stock_data.json"      # Weekly timeframe sample
+    daily: "sample_daily_data.json"       # Daily timeframe sample
+  
+  # Production batch processing (1000+ files)
+  batch_processing:
+    max_files_per_batch: 100              # Process 100 JSONs at a time (optimal for 1000+ files)
+    parallel_workers: 4                   # Concurrent processing threads (GitHub Actions optimized)
+    timeframes: ["daily", "weekly"]       # Supported timeframes
+    
+  # Production scaling options
+  scaling:
+    high_volume_mode:                     # For 2000+ files
+      max_files_per_batch: 50
+      parallel_workers: 6
+      memory_limit_gb: 7
+    
+    memory_constrained_mode:              # For limited resources
+      max_files_per_batch: 200
+      parallel_workers: 2
+      memory_limit_gb: 4
+      
+    standard_mode:                        # For 1000 files (default)
+      max_files_per_batch: 100
+      parallel_workers: 4
+      memory_limit_gb: 6
+  
+# Processing Settings
+processing:
+  timestamp_format: "YYYYMMDDTHHMM"
+  timezone: "UTC"
+  validate_data: true
+  clean_missing_values: true
+  
+  # Data transformation options
+  normalize_indicators: false
+  scale_volume: false
+  fill_missing_dates: true
+  
+# Output Configuration  
+output:
+  file_prefix: ""
+  csv_delimiter: ","
+  tradingview_format: true
+  include_headers: false
+  
+  # File naming convention (4 output files)
+  files:
+    price_data: "PRICE_DATA.csv"      # OHLCV from chart.prices
+    rlst_rating: "RLST_RATING.csv"    # Time-aligned RLST with timestamps
+    bc_indicator: "BC_INDICATOR.csv"  # Time-aligned BC with timestamps
+    blue_dots: "BLUE_DOTS.csv"        # Binary signals from blueDotData.dates
+
+# Signal Processing
+signals:
+  blue_dot:
+    binary_encoding: true
+    missing_value: 0
+    date_format: "YYYY-MM-DD"
+    
+  rlst_rating:
+    valid_range: [0, 99]
+    missing_value: null
+    smoothing: false
+    
+  bc_indicator:
+    scaling: "none"  # Options: none, normalize, standardize
+    range_analysis: true  # Analyze BC value ranges for thresholds
+    trend_detection: true # Enable BC trend analysis
+    outlier_threshold: 3
+    missing_value: null
+    typical_range: [18000, 26000]  # Based on sample data analysis
+    
+# Validation Rules
+validation:
+  required_fields:
+    chart: ["prices"]
+    prices: ["priceDate", "open", "high", "low", "close", "volume", "rlst", "bc"]
+    blueDotData: ["dates"]
+    peripheralData: ["symbol", "rsRating"]
+    
+  data_quality:
+    max_missing_percentage: 10
+    min_data_points: 30
+    check_chronological_order: true
+    
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "logs/data_processing.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+# Production Performance Configuration
+performance:
+  chunk_size: 1000                        # Data processing chunk size
+  parallel_processing: true               # Enable parallel processing for production
+  memory_limit_mb: 6144                   # 6GB memory limit (GitHub Actions optimized)
+  
+  # Production optimization settings
+  vectorized_operations: true             # Use pandas vectorization
+  lazy_loading: true                      # Load data on demand
+  cache_intermediate: true                # Cache processing results
+  garbage_collection: true               # Explicit memory cleanup
+  
+  # Performance monitoring
+  enable_profiling: false                 # Disable in production (enable for debugging)
+  track_memory_usage: true               # Monitor memory consumption
+  benchmark_processing: true             # Track processing times
+  
+# Production Cloud Integration
+cloud_integration:
+  google_drive:
+    api_timeout: 300                      # 5 minutes timeout for large downloads
+    retry_attempts: 3                     # Retry failed API calls
+    batch_download_size: 50               # Download 50 files at a time
+    rate_limit_delay: 0.1                 # 100ms delay between requests
+    
+  github_pages:
+    deployment_timeout: 600               # 10 minutes deployment timeout
+    max_file_size_mb: 25                  # GitHub Pages file size limit
+    compression_enabled: true             # Enable gzip compression
+    
+  notifications:
+    success_webhook: "${SUCCESS_WEBHOOK_URL}"     # Slack/Discord success notifications
+    error_webhook: "${ERROR_WEBHOOK_URL}"         # Slack/Discord error notifications
+    health_check_interval: 21600                 # 6 hours between health checks

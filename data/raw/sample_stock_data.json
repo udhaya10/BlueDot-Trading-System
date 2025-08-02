@@ -1,0 +1,1806 @@
+{
+    "responseHeader": {
+        "error": false,
+        "errorCode": null,
+        "errorShortDesc": null,
+        "asOfDate": 1754140116778,
+        "errorLongDesc": null,
+        "fromCache": false,
+        "cacheType": "t60Cache"
+    },
+    "chart": {
+        "prices": [
+            {
+                "priceDate": 1753986600000,
+                "high": 17149,
+                "low": 16128,
+                "close": 16848,
+                "volume": 1553525,
+                "pdt": "TradingDate",
+                "bc": 24565.35,
+                "open": 16749,
+                "rlst": 78
+            },
+            {
+                "priceDate": 1753381800000,
+                "high": 16910,
+                "low": 15860,
+                "close": 16700,
+                "volume": 2475098,
+                "pdt": "TradingDate",
+                "bc": 24837,
+                "open": 15978,
+                "rlst": 76
+            },
+            {
+                "priceDate": 1752777000000,
+                "high": 16450,
+                "low": 15710,
+                "close": 15960,
+                "volume": 1729063,
+                "pdt": "TradingDate",
+                "bc": 24968.4,
+                "open": 15779,
+                "rlst": 68
+            },
+            {
+                "priceDate": 1752172200000,
+                "high": 15930,
+                "low": 15118,
+                "close": 15786,
+                "volume": 2103339,
+                "pdt": "TradingDate",
+                "bc": 25149.85,
+                "open": 15240,
+                "rlst": 72
+            },
+            {
+                "priceDate": 1751567400000,
+                "high": 15291,
+                "low": 14376,
+                "close": 15202,
+                "volume": 3471201,
+                "pdt": "TradingDate",
+                "bc": 25461,
+                "open": 14588,
+                "rlst": 67
+            },
+            {
+                "priceDate": 1750962600000,
+                "high": 14954,
+                "low": 13280,
+                "close": 14473,
+                "volume": 3954774,
+                "pdt": "TradingDate",
+                "bc": 25637.8,
+                "open": 13800,
+                "rlst": 57
+            },
+            {
+                "priceDate": 1750357800000,
+                "high": 14548,
+                "low": 13862,
+                "close": 14047,
+                "volume": 1985202,
+                "pdt": "TradingDate",
+                "bc": 25112.4,
+                "open": 14311,
+                "rlst": 57
+            },
+            {
+                "priceDate": 1749753000000,
+                "high": 15065,
+                "low": 14203,
+                "close": 14311,
+                "volume": 1114863,
+                "pdt": "TradingDate",
+                "bc": 24718.6,
+                "open": 14922,
+                "rlst": 67
+            },
+            {
+                "priceDate": 1749148200000,
+                "high": 15070,
+                "low": 14381,
+                "close": 14855,
+                "volume": 1715612,
+                "pdt": "TradingDate",
+                "bc": 25003.05,
+                "open": 14680,
+                "rlst": 73
+            },
+            {
+                "priceDate": 1748543400000,
+                "high": 15295,
+                "low": 14600,
+                "close": 14692,
+                "volume": 2129019,
+                "pdt": "TradingDate",
+                "bc": 24750.7,
+                "open": 15097,
+                "rlst": 77
+            },
+            {
+                "priceDate": 1747938600000,
+                "high": 17025,
+                "low": 14862,
+                "close": 15019,
+                "volume": 4240853,
+                "pdt": "TradingDate",
+                "bc": 24853.15,
+                "open": 16700,
+                "rlst": 81
+            },
+            {
+                "priceDate": 1747333800000,
+                "high": 16749,
+                "low": 15565,
+                "close": 16660,
+                "volume": 2134544,
+                "pdt": "TradingDate",
+                "bc": 25019.8,
+                "open": 15980,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1746729000000,
+                "high": 16759,
+                "low": 15051,
+                "close": 15190,
+                "volume": 1629924,
+                "pdt": "TradingDate",
+                "bc": 24008,
+                "open": 16469,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1746124200000,
+                "high": 16857,
+                "low": 16271,
+                "close": 16347,
+                "volume": 1317222,
+                "pdt": "TradingDate",
+                "bc": 24346.7,
+                "open": 16305,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1745519400000,
+                "high": 17069,
+                "low": 15386,
+                "close": 16219,
+                "volume": 3354184,
+                "pdt": "TradingDate",
+                "bc": 24039.35,
+                "open": 15399,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1744914600000,
+                "high": 15419,
+                "low": 13560.45,
+                "close": 15323,
+                "volume": 1773050,
+                "pdt": "TradingDate",
+                "bc": 23851.65,
+                "open": 13946.55,
+                "rlst": null
+            },
+            {
+                "priceDate": 1744309800000,
+                "high": 14339,
+                "low": 12202.2,
+                "close": 14301.9,
+                "volume": 2291957,
+                "pdt": "TradingDate",
+                "bc": 22828.55,
+                "open": 12202.2,
+                "rlst": 79
+            },
+            {
+                "priceDate": 1743705000000,
+                "high": 13680.8,
+                "low": 12880,
+                "close": 13137.55,
+                "volume": 1318686,
+                "pdt": "TradingDate",
+                "bc": 22904.45,
+                "open": 13516,
+                "rlst": 77
+            },
+            {
+                "priceDate": 1743100200000,
+                "high": 14740,
+                "low": 13009.4,
+                "close": 13179.5,
+                "volume": 2541271,
+                "pdt": "TradingDate",
+                "bc": 23519.35,
+                "open": 14122,
+                "rlst": 79
+            },
+            {
+                "priceDate": 1742495400000,
+                "high": 14122.95,
+                "low": 13054.6,
+                "close": 14056.8,
+                "volume": 1234284,
+                "pdt": "TradingDate",
+                "bc": 23350.4,
+                "open": 13144.85,
+                "rlst": 82
+            },
+            {
+                "priceDate": 1741890600000,
+                "high": 14087.95,
+                "low": 12750.1,
+                "close": 13324.05,
+                "volume": 1600463,
+                "pdt": "TradingDate",
+                "bc": 22397.2,
+                "open": 13911.25,
+                "rlst": null
+            },
+            {
+                "priceDate": 1741285800000,
+                "high": 14710,
+                "low": 13350.1,
+                "close": 13911.25,
+                "volume": 1389937,
+                "pdt": "TradingDate",
+                "bc": 22552.5,
+                "open": 13935.85,
+                "rlst": 88
+            },
+            {
+                "priceDate": 1740681000000,
+                "high": 14326.6,
+                "low": 13453,
+                "close": 13935.85,
+                "volume": 1540612,
+                "pdt": "TradingDate",
+                "bc": 22124.7,
+                "open": 13762,
+                "rlst": 85
+            },
+            {
+                "priceDate": 1740076200000,
+                "high": 14425,
+                "low": 13592.25,
+                "close": 13971.9,
+                "volume": 1081725,
+                "pdt": "TradingDate",
+                "bc": 22795.9,
+                "open": 13863.2,
+                "rlst": 88
+            },
+            {
+                "priceDate": 1739471400000,
+                "high": 15244.45,
+                "low": 13781.4,
+                "close": 14010.7,
+                "volume": 1389372,
+                "pdt": "TradingDate",
+                "bc": 22929.25,
+                "open": 15231.6,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1738866600000,
+                "high": 15340,
+                "low": 14225,
+                "close": 15154.65,
+                "volume": 1505866,
+                "pdt": "TradingDate",
+                "bc": 23559.95,
+                "open": 14580.1,
+                "rlst": 88
+            },
+            {
+                "priceDate": 1738261800000,
+                "high": 15632,
+                "low": 14359.5,
+                "close": 14985.95,
+                "volume": 2045530,
+                "pdt": "TradingDate",
+                "bc": 23508.4,
+                "open": 15250,
+                "rlst": 89
+            },
+            {
+                "priceDate": 1737657000000,
+                "high": 17687.9,
+                "low": 14280,
+                "close": 15584.9,
+                "volume": 5118194,
+                "pdt": "TradingDate",
+                "bc": 23092.2,
+                "open": 17324,
+                "rlst": 89
+            },
+            {
+                "priceDate": 1737052200000,
+                "high": 17330.5,
+                "low": 15741,
+                "close": 17224.45,
+                "volume": 2043545,
+                "pdt": "TradingDate",
+                "bc": 23203.2,
+                "open": 16500,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1736447400000,
+                "high": 18700,
+                "low": 16611,
+                "close": 16709.2,
+                "volume": 2386744,
+                "pdt": "TradingDate",
+                "bc": 23431.5,
+                "open": 18412,
+                "rlst": 89
+            },
+            {
+                "priceDate": 1735842600000,
+                "high": 18584.65,
+                "low": 17472,
+                "close": 18397.65,
+                "volume": 1198914,
+                "pdt": "TradingDate",
+                "bc": 24004.75,
+                "open": 18035,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1735237800000,
+                "high": 18608.65,
+                "low": 17615,
+                "close": 17972.3,
+                "volume": 963272,
+                "pdt": "TradingDate",
+                "bc": 23813.4,
+                "open": 18058,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1734633000000,
+                "high": 19148.9,
+                "low": 17770.55,
+                "close": 17944.9,
+                "volume": 3138581,
+                "pdt": "TradingDate",
+                "bc": 23587.5,
+                "open": 18212,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1734028200000,
+                "high": 18034,
+                "low": 17121.05,
+                "close": 17954.4,
+                "volume": 1727382,
+                "pdt": "TradingDate",
+                "bc": 24768.3,
+                "open": 17421.05,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1733423400000,
+                "high": 17530,
+                "low": 16020,
+                "close": 17421.05,
+                "volume": 3607999,
+                "pdt": "TradingDate",
+                "bc": 24677.8,
+                "open": 16025,
+                "rlst": 92
+            },
+            {
+                "priceDate": 1732818600000,
+                "high": 15987.95,
+                "low": 15365.3,
+                "close": 15807.4,
+                "volume": 2082244,
+                "pdt": "TradingDate",
+                "bc": 24131.1,
+                "open": 15704.95,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1732213800000,
+                "high": 15490,
+                "low": 14725,
+                "close": 15348.7,
+                "volume": 1908028,
+                "pdt": "TradingDate",
+                "bc": 23907.25,
+                "open": 14950,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1731609000000,
+                "high": 15778,
+                "low": 14540,
+                "close": 14776.1,
+                "volume": 2000437,
+                "pdt": "TradingDate",
+                "bc": 23532.7,
+                "open": 15621.1,
+                "rlst": null
+            },
+            {
+                "priceDate": 1731004200000,
+                "high": 15969.2,
+                "low": 13711.05,
+                "close": 15621.1,
+                "volume": 4556023,
+                "pdt": "TradingDate",
+                "bc": 24148.2,
+                "open": 14120,
+                "rlst": 92
+            },
+            {
+                "priceDate": 1730399400000,
+                "high": 15092.9,
+                "low": 13800,
+                "close": 14061.6,
+                "volume": 3553804,
+                "pdt": "TradingDate",
+                "bc": 24205.35,
+                "open": 14100,
+                "rlst": null
+            },
+            {
+                "priceDate": 1729794600000,
+                "high": 15900,
+                "low": 13062.3,
+                "close": 13937.2,
+                "volume": 5479916,
+                "pdt": "TradingDate",
+                "bc": 24180.8,
+                "open": 15470,
+                "rlst": 92
+            },
+            {
+                "priceDate": 1729189800000,
+                "high": 15494,
+                "low": 14909,
+                "close": 15381.8,
+                "volume": 1200384,
+                "pdt": "TradingDate",
+                "bc": 24854.05,
+                "open": 15129.55,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1728585000000,
+                "high": 15188.9,
+                "low": 13350,
+                "close": 15143.65,
+                "volume": 2963326,
+                "pdt": "TradingDate",
+                "bc": 24964.25,
+                "open": 13722.3,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1727980200000,
+                "high": 14265,
+                "low": 13425,
+                "close": 13634,
+                "volume": 1668855,
+                "pdt": "TradingDate",
+                "bc": 25014.6,
+                "open": 14024.6,
+                "rlst": 87
+            },
+            {
+                "priceDate": 1727375400000,
+                "high": 14498,
+                "low": 13825,
+                "close": 14037.65,
+                "volume": 2011260,
+                "pdt": "TradingDate",
+                "bc": 26178.95,
+                "open": 14100,
+                "rlst": 87
+            },
+            {
+                "priceDate": 1726770600000,
+                "high": 14399.95,
+                "low": 13050.5,
+                "close": 13995.6,
+                "volume": 4419230,
+                "pdt": "TradingDate",
+                "bc": 25790.95,
+                "open": 13170,
+                "rlst": 88
+            },
+            {
+                "priceDate": 1726165800000,
+                "high": 13120,
+                "low": 12022,
+                "close": 13027.65,
+                "volume": 2263349,
+                "pdt": "TradingDate",
+                "bc": 25356.5,
+                "open": 12040,
+                "rlst": 85
+            },
+            {
+                "priceDate": 1725561000000,
+                "high": 13160,
+                "low": 12043.05,
+                "close": 12063.85,
+                "volume": 2580753,
+                "pdt": "TradingDate",
+                "bc": 24852.15,
+                "open": 13160,
+                "rlst": 84
+            },
+            {
+                "priceDate": 1724956200000,
+                "high": 13639.8,
+                "low": 12865,
+                "close": 13170.95,
+                "volume": 6436266,
+                "pdt": "TradingDate",
+                "bc": 25235.9,
+                "open": 13399,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1724351400000,
+                "high": 13394.9,
+                "low": 12419.8,
+                "close": 13270.55,
+                "volume": 2721313,
+                "pdt": "TradingDate",
+                "bc": 24823.15,
+                "open": 12550,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1723746600000,
+                "high": 12423.6,
+                "low": 11559.9,
+                "close": 12374.9,
+                "volume": 2290426,
+                "pdt": "TradingDate",
+                "bc": 24541.15,
+                "open": 11739.65,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1723141800000,
+                "high": 11800.05,
+                "low": 10950.05,
+                "close": 11740.45,
+                "volume": 2166579,
+                "pdt": "TradingDate",
+                "bc": 24367.5,
+                "open": 10950.05,
+                "rlst": null
+            },
+            {
+                "priceDate": 1722537000000,
+                "high": 12690,
+                "low": 11225,
+                "close": 11654.55,
+                "volume": 4317411,
+                "pdt": "TradingDate",
+                "bc": 24717.7,
+                "open": 11349.95,
+                "rlst": 87
+            },
+            {
+                "priceDate": 1721932200000,
+                "high": 11475,
+                "low": 10620,
+                "close": 11272.6,
+                "volume": 2285921,
+                "pdt": "TradingDate",
+                "bc": 24834.85,
+                "open": 11267.2,
+                "rlst": 89
+            },
+            {
+                "priceDate": 1721327400000,
+                "high": 12754.55,
+                "low": 11210.55,
+                "close": 11267.2,
+                "volume": 1933767,
+                "pdt": "TradingDate",
+                "bc": 24530.9,
+                "open": 12500,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1720722600000,
+                "high": 12689.4,
+                "low": 12164.3,
+                "close": 12398.95,
+                "volume": 1255854,
+                "pdt": "TradingDate",
+                "bc": 24502.15,
+                "open": 12549,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1720117800000,
+                "high": 12879,
+                "low": 12086.45,
+                "close": 12500,
+                "volume": 2338246,
+                "pdt": "TradingDate",
+                "bc": 24323.85,
+                "open": 12099,
+                "rlst": 91
+            },
+            {
+                "priceDate": 1719513000000,
+                "high": 12149,
+                "low": 11372.15,
+                "close": 11966.8,
+                "volume": 2089349,
+                "pdt": "TradingDate",
+                "bc": 24010.6,
+                "open": 11500,
+                "rlst": 89
+            },
+            {
+                "priceDate": 1718908200000,
+                "high": 11679.9,
+                "low": 10864.85,
+                "close": 11539.1,
+                "volume": 1686342,
+                "pdt": "TradingDate",
+                "bc": 23501.1,
+                "open": 10959,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1718303400000,
+                "high": 11458.9,
+                "low": 10007.55,
+                "close": 11242.85,
+                "volume": 2855611,
+                "pdt": "TradingDate",
+                "bc": 23465.6,
+                "open": 10059.4,
+                "rlst": 90
+            },
+            {
+                "priceDate": 1717698600000,
+                "high": 10088.1,
+                "low": 8453,
+                "close": 9985.1,
+                "volume": 2927954,
+                "pdt": "TradingDate",
+                "bc": 23290.15,
+                "open": 9639.9,
+                "rlst": 89
+            },
+            {
+                "priceDate": 1717093800000,
+                "high": 9458,
+                "low": 9008,
+                "close": 9396.35,
+                "volume": 1607137,
+                "pdt": "TradingDate",
+                "bc": 22530.7,
+                "open": 9360.9,
+                "rlst": null
+            },
+            {
+                "priceDate": 1716489000000,
+                "high": 9488.2,
+                "low": 8310,
+                "close": 9298.2,
+                "volume": 2034311,
+                "pdt": "TradingDate",
+                "bc": 22957.1,
+                "open": 8310,
+                "rlst": 88
+            },
+            {
+                "priceDate": 1715884200000,
+                "high": 9062,
+                "low": 7932.55,
+                "close": 8938.4,
+                "volume": 5455627,
+                "pdt": "TradingDate",
+                "bc": 22466.1,
+                "open": 8449,
+                "rlst": 87
+            },
+            {
+                "priceDate": 1715279400000,
+                "high": 8509.95,
+                "low": 8232.1,
+                "close": 8418.55,
+                "volume": 999323,
+                "pdt": "TradingDate",
+                "bc": 22055.2,
+                "open": 8500,
+                "rlst": 89
+            },
+            {
+                "priceDate": 1714674600000,
+                "high": 8655,
+                "low": 8270.45,
+                "close": 8451.65,
+                "volume": 1085795,
+                "pdt": "TradingDate",
+                "bc": 22475.85,
+                "open": 8568.05,
+                "rlst": 87
+            },
+            {
+                "priceDate": 1714069800000,
+                "high": 8607,
+                "low": 7627.45,
+                "close": 8580.15,
+                "volume": 2867047,
+                "pdt": "TradingDate",
+                "bc": 22419.95,
+                "open": 7680,
+                "rlst": 89
+            },
+            {
+                "priceDate": 1713465000000,
+                "high": 7829,
+                "low": 7198.35,
+                "close": 7531.95,
+                "volume": 1259561,
+                "pdt": "TradingDate",
+                "bc": 22147,
+                "open": 7700,
+                "rlst": 83
+            },
+            {
+                "priceDate": 1712860200000,
+                "high": 7983,
+                "low": 7590,
+                "close": 7845.4,
+                "volume": 1557120,
+                "pdt": "TradingDate",
+                "bc": 22519.4,
+                "open": 7682.05,
+                "rlst": 84
+            },
+            {
+                "priceDate": 1712255400000,
+                "high": 7950,
+                "low": 7480.05,
+                "close": 7660.5,
+                "volume": 1728315,
+                "pdt": "TradingDate",
+                "bc": 22513.7,
+                "open": 7520,
+                "rlst": 83
+            },
+            {
+                "priceDate": 1711650600000,
+                "high": 7580,
+                "low": 7027,
+                "close": 7479.25,
+                "volume": 772797,
+                "pdt": "TradingDate",
+                "bc": 22326.9,
+                "open": 7040,
+                "rlst": null
+            },
+            {
+                "priceDate": 1711045800000,
+                "high": 7189.85,
+                "low": 6839.1,
+                "close": 7165.15,
+                "volume": 1078269,
+                "pdt": "TradingDate",
+                "bc": 22096.75,
+                "open": 6963,
+                "rlst": 81
+            },
+            {
+                "priceDate": 1710441000000,
+                "high": 7229.8,
+                "low": 6503.5,
+                "close": 6962,
+                "volume": 1366359,
+                "pdt": "TradingDate",
+                "bc": 22023.35,
+                "open": 7184,
+                "rlst": 79
+            },
+            {
+                "priceDate": 1709836200000,
+                "high": 7236,
+                "low": 6922.15,
+                "close": 7142.95,
+                "volume": 1182239,
+                "pdt": "TradingDate",
+                "bc": 22493.55,
+                "open": 7043.2,
+                "rlst": null
+            },
+            {
+                "priceDate": 1709231400000,
+                "high": 7048,
+                "low": 6472,
+                "close": 7004.95,
+                "volume": 2997746,
+                "pdt": "TradingDate",
+                "bc": 22338.75,
+                "open": 6901.6,
+                "rlst": 73
+            },
+            {
+                "priceDate": 1708626600000,
+                "high": 6929,
+                "low": 6410,
+                "close": 6867.5,
+                "volume": 2776240,
+                "pdt": "TradingDate",
+                "bc": 22212.7,
+                "open": 6425.2,
+                "rlst": 76
+            },
+            {
+                "priceDate": 1708021800000,
+                "high": 6472,
+                "low": 6131,
+                "close": 6378.1,
+                "volume": 861356,
+                "pdt": "TradingDate",
+                "bc": 22040.7,
+                "open": 6295,
+                "rlst": 75
+            },
+            {
+                "priceDate": 1707417000000,
+                "high": 6462.2,
+                "low": 6125.4,
+                "close": 6277.9,
+                "volume": 1298780,
+                "pdt": "TradingDate",
+                "bc": 21782.5,
+                "open": 6251,
+                "rlst": 74
+            },
+            {
+                "priceDate": 1706812200000,
+                "high": 6348,
+                "low": 5800.2,
+                "close": 6237.8,
+                "volume": 2509379,
+                "pdt": "TradingDate",
+                "bc": 21853.8,
+                "open": 5898,
+                "rlst": 73
+            },
+            {
+                "priceDate": 1706207400000,
+                "high": 6211.9,
+                "low": 5782.85,
+                "close": 5879.45,
+                "volume": 970020,
+                "pdt": "TradingDate",
+                "bc": 21352.6,
+                "open": 6198,
+                "rlst": null
+            },
+            {
+                "priceDate": 1705602600000,
+                "high": 6519.45,
+                "low": 6020,
+                "close": 6100.2,
+                "volume": 2320621,
+                "pdt": "TradingDate",
+                "bc": 21622.4,
+                "open": 6480,
+                "rlst": 68
+            },
+            {
+                "priceDate": 1704997800000,
+                "high": 6600,
+                "low": 6280,
+                "close": 6553.95,
+                "volume": 1350838,
+                "pdt": "TradingDate",
+                "bc": 21894.55,
+                "open": 6399.85,
+                "rlst": 79
+            },
+            {
+                "priceDate": 1704393000000,
+                "high": 6585.8,
+                "low": 6243.15,
+                "close": 6378.4,
+                "volume": 1604992,
+                "pdt": "TradingDate",
+                "bc": 21710.8,
+                "open": 6560,
+                "rlst": 75
+            },
+            {
+                "priceDate": 1703788200000,
+                "high": 6619.4,
+                "low": 6384,
+                "close": 6566.75,
+                "volume": 1184805,
+                "pdt": "TradingDate",
+                "bc": 21731.4,
+                "open": 6553.9,
+                "rlst": 78
+            },
+            {
+                "priceDate": 1703183400000,
+                "high": 6584,
+                "low": 6220,
+                "close": 6478.35,
+                "volume": 3475223,
+                "pdt": "TradingDate",
+                "bc": 21349.4,
+                "open": 6315,
+                "rlst": 80
+            },
+            {
+                "priceDate": 1702578600000,
+                "high": 6765,
+                "low": 5961,
+                "close": 6316.9,
+                "volume": 7312115,
+                "pdt": "TradingDate",
+                "bc": 21456.65,
+                "open": 5980,
+                "rlst": 77
+            },
+            {
+                "priceDate": 1701973800000,
+                "high": 6186.15,
+                "low": 5876,
+                "close": 5964.9,
+                "volume": 2108485,
+                "pdt": "TradingDate",
+                "bc": 20969.4,
+                "open": 6110,
+                "rlst": 75
+            },
+            {
+                "priceDate": 1701369000000,
+                "high": 6034.95,
+                "low": 5265,
+                "close": 5951.65,
+                "volume": 3042279,
+                "pdt": "TradingDate",
+                "bc": 20267.9,
+                "open": 5365,
+                "rlst": 74
+            },
+            {
+                "priceDate": 1700764200000,
+                "high": 5565.8,
+                "low": 5265,
+                "close": 5277.85,
+                "volume": 1320618,
+                "pdt": "TradingDate",
+                "bc": 19794.7,
+                "open": 5475,
+                "rlst": 67
+            },
+            {
+                "priceDate": 1700159400000,
+                "high": 5488.5,
+                "low": 5206.6,
+                "close": 5426.85,
+                "volume": 1344041,
+                "pdt": "TradingDate",
+                "bc": 19731.8,
+                "open": 5274.45,
+                "rlst": 76
+            },
+            {
+                "priceDate": 1699554600000,
+                "high": 5425,
+                "low": 5223.25,
+                "close": 5274.9,
+                "volume": 1264642,
+                "pdt": "TradingDate",
+                "bc": 19425.35,
+                "open": 5317.9,
+                "rlst": 77
+            },
+            {
+                "priceDate": 1698949800000,
+                "high": 5397,
+                "low": 5076,
+                "close": 5274.2,
+                "volume": 2928008,
+                "pdt": "TradingDate",
+                "bc": 19230.6,
+                "open": 5379.9,
+                "rlst": 78
+            },
+            {
+                "priceDate": 1698345000000,
+                "high": 5607.1,
+                "low": 5288.25,
+                "close": 5374.75,
+                "volume": 2649755,
+                "pdt": "TradingDate",
+                "bc": 19047.25,
+                "open": 5520,
+                "rlst": 83
+            },
+            {
+                "priceDate": 1697740200000,
+                "high": 5575,
+                "low": 5291,
+                "close": 5520.9,
+                "volume": 1815569,
+                "pdt": "TradingDate",
+                "bc": 19542.65,
+                "open": 5291,
+                "rlst": 78
+            },
+            {
+                "priceDate": 1697135400000,
+                "high": 5364.8,
+                "low": 5028,
+                "close": 5339.95,
+                "volume": 1650500,
+                "pdt": "TradingDate",
+                "bc": 19751.05,
+                "open": 5032.15,
+                "rlst": 74
+            },
+            {
+                "priceDate": 1696530600000,
+                "high": 5335,
+                "low": 5062.1,
+                "close": 5128.75,
+                "volume": 1435161,
+                "pdt": "TradingDate",
+                "bc": 19653.5,
+                "open": 5250,
+                "rlst": 72
+            },
+            {
+                "priceDate": 1695925800000,
+                "high": 5378.85,
+                "low": 4733.45,
+                "close": 5265,
+                "volume": 4201362,
+                "pdt": "TradingDate",
+                "bc": 19638.3,
+                "open": 4810,
+                "rlst": 71
+            },
+            {
+                "priceDate": 1695321000000,
+                "high": 5070,
+                "low": 4785.75,
+                "close": 4808.4,
+                "volume": 888452,
+                "pdt": "TradingDate",
+                "bc": 19674.25,
+                "open": 5040,
+                "rlst": 63
+            },
+            {
+                "priceDate": 1694716200000,
+                "high": 5207.5,
+                "low": 4985.05,
+                "close": 5059,
+                "volume": 1261137,
+                "pdt": "TradingDate",
+                "bc": 20192.35,
+                "open": 5139,
+                "rlst": 65
+            },
+            {
+                "priceDate": 1694111400000,
+                "high": 5224.95,
+                "low": 4960,
+                "close": 5121.2,
+                "volume": 2099976,
+                "pdt": "TradingDate",
+                "bc": 19819.95,
+                "open": 5081.8,
+                "rlst": 69
+            },
+            {
+                "priceDate": 1693506600000,
+                "high": 5163,
+                "low": 4815.05,
+                "close": 5057.25,
+                "volume": 2035384,
+                "pdt": "TradingDate",
+                "bc": 19435.3,
+                "open": 4851.3,
+                "rlst": 71
+            },
+            {
+                "priceDate": 1692901800000,
+                "high": 5068.9,
+                "low": 4730.1,
+                "close": 4859.75,
+                "volume": 3365543,
+                "pdt": "TradingDate",
+                "bc": 19265.8,
+                "open": 4749.95,
+                "rlst": 73
+            },
+            {
+                "priceDate": 1692297000000,
+                "high": 4810,
+                "low": 4585,
+                "close": 4737.8,
+                "volume": 2131862,
+                "pdt": "TradingDate",
+                "bc": 19310.15,
+                "open": 4780,
+                "rlst": 80
+            },
+            {
+                "priceDate": 1691692200000,
+                "high": 4967.75,
+                "low": 4385.05,
+                "close": 4780.55,
+                "volume": 6833945,
+                "pdt": "TradingDate",
+                "bc": 19428.3,
+                "open": 4599.95,
+                "rlst": 82
+            },
+            {
+                "priceDate": 1691087400000,
+                "high": 4816.85,
+                "low": 4020,
+                "close": 4616.25,
+                "volume": 6946083,
+                "pdt": "TradingDate",
+                "bc": 19517,
+                "open": 4020,
+                "rlst": 79
+            },
+            {
+                "priceDate": 1690482600000,
+                "high": 4185.7,
+                "low": 3953,
+                "close": 4063.6,
+                "volume": 2881395,
+                "pdt": "TradingDate",
+                "bc": 19646.05,
+                "open": 4130,
+                "rlst": 69
+            },
+            {
+                "priceDate": 1689877800000,
+                "high": 4407.1,
+                "low": 4160,
+                "close": 4176.4,
+                "volume": 1301408,
+                "pdt": "TradingDate",
+                "bc": 19745,
+                "open": 4342,
+                "rlst": 66
+            },
+            {
+                "priceDate": 1689273000000,
+                "high": 4430,
+                "low": 4220.95,
+                "close": 4319.75,
+                "volume": 1585979,
+                "pdt": "TradingDate",
+                "bc": 19564.5,
+                "open": 4249.6,
+                "rlst": 70
+            },
+            {
+                "priceDate": 1688668200000,
+                "high": 4443.7,
+                "low": 4145.2,
+                "close": 4244,
+                "volume": 1879268,
+                "pdt": "TradingDate",
+                "bc": 19331.8,
+                "open": 4410.05,
+                "rlst": 68
+            },
+            {
+                "priceDate": 1688063400000,
+                "high": 4511,
+                "low": 4316.25,
+                "close": 4395,
+                "volume": 2091163,
+                "pdt": "TradingDate",
+                "bc": 19189.05,
+                "open": 4326.95,
+                "rlst": 70
+            },
+            {
+                "priceDate": 1687458600000,
+                "high": 4730,
+                "low": 4298,
+                "close": 4326.2,
+                "volume": 4028281,
+                "pdt": "TradingDate",
+                "bc": 18665.5,
+                "open": 4560,
+                "rlst": 70
+            },
+            {
+                "priceDate": 1686853800000,
+                "high": 4650,
+                "low": 3965,
+                "close": 4546.6,
+                "volume": 5586691,
+                "pdt": "TradingDate",
+                "bc": 18826,
+                "open": 4040,
+                "rlst": 76
+            },
+            {
+                "priceDate": 1686249000000,
+                "high": 4132,
+                "low": 3845.55,
+                "close": 4074.4,
+                "volume": 3260441,
+                "pdt": "TradingDate",
+                "bc": 18563.4,
+                "open": 3992.95,
+                "rlst": 66
+            },
+            {
+                "priceDate": 1685644200000,
+                "high": 4025,
+                "low": 3652.4,
+                "close": 3966.15,
+                "volume": 4978949,
+                "pdt": "TradingDate",
+                "bc": 18534.1,
+                "open": 3675.1,
+                "rlst": 62
+            },
+            {
+                "priceDate": 1685039400000,
+                "high": 3684.25,
+                "low": 3041.05,
+                "close": 3661.2,
+                "volume": 8242737,
+                "pdt": "TradingDate",
+                "bc": 18499.35,
+                "open": 3042.7,
+                "rlst": 59
+            }
+        ],
+        "peripheralData": {
+            "symbol": "DIX.IN",
+            "name": "Dixon Technologies",
+            "currentPrice": 16848,
+            "currentVolume": 341381,
+            "week52High": 19148.9,
+            "week52Low": 10950.05,
+            "epsDueDate": null,
+            "rsRating": 78,
+            "prevPrice": 16841,
+            "prevVolume": 561218,
+            "prevAggregatedPrice": null,
+            "prevAggregatedVolume": null,
+            "asOfDate": 1754042416000,
+            "currentDate": 1754073000000,
+            "volumeSource": null,
+            "isETF": 0,
+            "isFFO": 0,
+            "aVol": 444634,
+            "theRate": 1,
+            "currencySymbol": "",
+            "instrumentId": 3152556,
+            "instrumentType": "Stock",
+            "periodcity": "Weekly",
+            "vol50ma": 444634,
+            "flagged": false
+        },
+        "corpEvents": null,
+        "quarterlySalesAndEarnings": null,
+        "patternsResponse": null,
+        "lastCompletedPattern": {
+            "baseTypeId": 6,
+            "baseTypeName": "Consolidation"
+        },
+        "blueDotData": {
+            "dates": [
+                {
+                    "blueDotDate": "2024-11-11"
+                },
+                {
+                    "blueDotDate": "2024-11-08"
+                },
+                {
+                    "blueDotDate": "2024-11-07"
+                },
+                {
+                    "blueDotDate": "2024-11-06"
+                },
+                {
+                    "blueDotDate": "2024-10-24"
+                },
+                {
+                    "blueDotDate": "2024-10-23"
+                },
+                {
+                    "blueDotDate": "2024-10-22"
+                },
+                {
+                    "blueDotDate": "2024-10-21"
+                },
+                {
+                    "blueDotDate": "2024-10-18"
+                },
+                {
+                    "blueDotDate": "2024-10-17"
+                },
+                {
+                    "blueDotDate": "2024-10-16"
+                },
+                {
+                    "blueDotDate": "2024-10-15"
+                },
+                {
+                    "blueDotDate": "2024-10-14"
+                },
+                {
+                    "blueDotDate": "2024-10-11"
+                },
+                {
+                    "blueDotDate": "2024-10-10"
+                },
+                {
+                    "blueDotDate": "2024-10-09"
+                },
+                {
+                    "blueDotDate": "2024-10-08"
+                },
+                {
+                    "blueDotDate": "2024-09-25"
+                },
+                {
+                    "blueDotDate": "2024-09-24"
+                },
+                {
+                    "blueDotDate": "2024-09-19"
+                },
+                {
+                    "blueDotDate": "2024-09-18"
+                },
+                {
+                    "blueDotDate": "2024-09-17"
+                },
+                {
+                    "blueDotDate": "2024-09-16"
+                },
+                {
+                    "blueDotDate": "2024-08-30"
+                },
+                {
+                    "blueDotDate": "2024-08-27"
+                },
+                {
+                    "blueDotDate": "2024-08-26"
+                },
+                {
+                    "blueDotDate": "2024-08-23"
+                },
+                {
+                    "blueDotDate": "2024-04-29"
+                },
+                {
+                    "blueDotDate": "2024-04-26"
+                },
+                {
+                    "blueDotDate": "2024-04-24"
+                },
+                {
+                    "blueDotDate": "2024-04-02"
+                },
+                {
+                    "blueDotDate": "2024-04-01"
+                },
+                {
+                    "blueDotDate": "2024-03-28"
+                },
+                {
+                    "blueDotDate": "2024-03-27"
+                },
+                {
+                    "blueDotDate": "2024-03-26"
+                },
+                {
+                    "blueDotDate": "2024-03-22"
+                },
+                {
+                    "blueDotDate": "2024-03-21"
+                },
+                {
+                    "blueDotDate": "2024-03-19"
+                },
+                {
+                    "blueDotDate": "2024-03-18"
+                },
+                {
+                    "blueDotDate": "2024-03-11"
+                },
+                {
+                    "blueDotDate": "2024-03-07"
+                },
+                {
+                    "blueDotDate": "2024-03-06"
+                },
+                {
+                    "blueDotDate": "2024-03-04"
+                },
+                {
+                    "blueDotDate": "2024-03-01"
+                },
+                {
+                    "blueDotDate": "2024-02-26"
+                },
+                {
+                    "blueDotDate": "2024-02-23"
+                },
+                {
+                    "blueDotDate": "2024-02-22"
+                },
+                {
+                    "blueDotDate": "2024-02-20"
+                },
+                {
+                    "blueDotDate": "2024-02-19"
+                },
+                {
+                    "blueDotDate": "2023-12-22"
+                },
+                {
+                    "blueDotDate": "2023-12-21"
+                },
+                {
+                    "blueDotDate": "2023-12-14"
+                },
+                {
+                    "blueDotDate": "2023-12-13"
+                },
+                {
+                    "blueDotDate": "2023-12-12"
+                },
+                {
+                    "blueDotDate": "2023-12-11"
+                },
+                {
+                    "blueDotDate": "2023-12-05"
+                },
+                {
+                    "blueDotDate": "2023-10-25"
+                },
+                {
+                    "blueDotDate": "2023-10-23"
+                },
+                {
+                    "blueDotDate": "2023-10-20"
+                },
+                {
+                    "blueDotDate": "2023-10-19"
+                },
+                {
+                    "blueDotDate": "2023-10-18"
+                },
+                {
+                    "blueDotDate": "2023-10-17"
+                },
+                {
+                    "blueDotDate": "2023-10-16"
+                },
+                {
+                    "blueDotDate": "2023-10-13"
+                },
+                {
+                    "blueDotDate": "2023-10-04"
+                },
+                {
+                    "blueDotDate": "2023-10-03"
+                },
+                {
+                    "blueDotDate": "2023-09-29"
+                },
+                {
+                    "blueDotDate": "2023-09-28"
+                },
+                {
+                    "blueDotDate": "2023-09-27"
+                },
+                {
+                    "blueDotDate": "2023-09-05"
+                },
+                {
+                    "blueDotDate": "2023-09-04"
+                },
+                {
+                    "blueDotDate": "2023-09-01"
+                },
+                {
+                    "blueDotDate": "2023-08-31"
+                },
+                {
+                    "blueDotDate": "2023-08-25"
+                },
+                {
+                    "blueDotDate": "2023-08-24"
+                },
+                {
+                    "blueDotDate": "2023-08-23"
+                },
+                {
+                    "blueDotDate": "2023-08-22"
+                },
+                {
+                    "blueDotDate": "2021-12-28"
+                },
+                {
+                    "blueDotDate": "2021-12-27"
+                },
+                {
+                    "blueDotDate": "2021-12-22"
+                },
+                {
+                    "blueDotDate": "2021-12-16"
+                },
+                {
+                    "blueDotDate": "2021-12-14"
+                },
+                {
+                    "blueDotDate": "2021-12-13"
+                },
+                {
+                    "blueDotDate": "2021-12-10"
+                },
+                {
+                    "blueDotDate": "2021-11-09"
+                },
+                {
+                    "blueDotDate": "2021-11-03"
+                },
+                {
+                    "blueDotDate": "2021-10-19"
+                },
+                {
+                    "blueDotDate": "2021-10-18"
+                },
+                {
+                    "blueDotDate": "2021-10-14"
+                },
+                {
+                    "blueDotDate": "2021-10-13"
+                },
+                {
+                    "blueDotDate": "2021-10-12"
+                },
+                {
+                    "blueDotDate": "2021-10-11"
+                },
+                {
+                    "blueDotDate": "2021-10-08"
+                },
+                {
+                    "blueDotDate": "2021-07-22"
+                },
+                {
+                    "blueDotDate": "2021-07-20"
+                },
+                {
+                    "blueDotDate": "2021-07-19"
+                },
+                {
+                    "blueDotDate": "2021-07-16"
+                },
+                {
+                    "blueDotDate": "2021-07-15"
+                },
+                {
+                    "blueDotDate": "2021-07-14"
+                },
+                {
+                    "blueDotDate": "2021-07-13"
+                },
+                {
+                    "blueDotDate": "2021-07-09"
+                },
+                {
+                    "blueDotDate": "2021-07-06"
+                },
+                {
+                    "blueDotDate": "2021-07-05"
+                },
+                {
+                    "blueDotDate": "2021-07-02"
+                },
+                {
+                    "blueDotDate": "2021-06-22"
+                },
+                {
+                    "blueDotDate": "2021-06-21"
+                },
+                {
+                    "blueDotDate": "2021-05-04"
+                },
+                {
+                    "blueDotDate": "2021-01-08"
+                },
+                {
+                    "blueDotDate": "2021-01-07"
+                },
+                {
+                    "blueDotDate": "2021-01-06"
+                },
+                {
+                    "blueDotDate": "2020-12-18"
+                },
+                {
+                    "blueDotDate": "2020-12-17"
+                },
+                {
+                    "blueDotDate": "2020-12-16"
+                },
+                {
+                    "blueDotDate": "2020-12-15"
+                },
+                {
+                    "blueDotDate": "2020-12-14"
+                },
+                {
+                    "blueDotDate": "2020-12-11"
+                },
+                {
+                    "blueDotDate": "2020-11-27"
+                },
+                {
+                    "blueDotDate": "2020-11-26"
+                },
+                {
+                    "blueDotDate": "2020-08-11"
+                },
+                {
+                    "blueDotDate": "2020-08-04"
+                },
+                {
+                    "blueDotDate": "2020-08-03"
+                },
+                {
+                    "blueDotDate": "2020-07-31"
+                },
+                {
+                    "blueDotDate": "2020-07-24"
+                },
+                {
+                    "blueDotDate": "2020-07-23"
+                },
+                {
+                    "blueDotDate": "2020-07-22"
+                },
+                {
+                    "blueDotDate": "2020-07-21"
+                },
+                {
+                    "blueDotDate": "2020-07-20"
+                },
+                {
+                    "blueDotDate": "2020-07-16"
+                },
+                {
+                    "blueDotDate": "2020-07-15"
+                },
+                {
+                    "blueDotDate": "2020-07-14"
+                },
+                {
+                    "blueDotDate": "2020-07-13"
+                },
+                {
+                    "blueDotDate": "2020-07-10"
+                },
+                {
+                    "blueDotDate": "2020-07-09"
+                },
+                {
+                    "blueDotDate": "2020-07-08"
+                },
+                {
+                    "blueDotDate": "2020-07-02"
+                },
+                {
+                    "blueDotDate": "2020-07-01"
+                },
+                {
+                    "blueDotDate": "2020-06-24"
+                },
+                {
+                    "blueDotDate": "2020-06-23"
+                },
+                {
+                    "blueDotDate": "2020-06-22"
+                },
+                {
+                    "blueDotDate": "2020-06-19"
+                },
+                {
+                    "blueDotDate": "2020-06-18"
+                },
+                {
+                    "blueDotDate": "2020-06-17"
+                },
+                {
+                    "blueDotDate": "2020-06-16"
+                },
+                {
+                    "blueDotDate": "2020-06-15"
+                },
+                {
+                    "blueDotDate": "2020-06-04"
+                },
+                {
+                    "blueDotDate": "2020-06-03"
+                },
+                {
+                    "blueDotDate": "2020-06-02"
+                },
+                {
+                    "blueDotDate": "2020-06-01"
+                },
+                {
+                    "blueDotDate": "2020-05-29"
+                },
+                {
+                    "blueDotDate": "2020-05-27"
+                },
+                {
+                    "blueDotDate": "2020-05-26"
+                },
+                {
+                    "blueDotDate": "2020-05-06"
+                },
+                {
+                    "blueDotDate": "2020-05-05"
+                },
+                {
+                    "blueDotDate": "2020-05-04"
+                },
+                {
+                    "blueDotDate": "2020-04-30"
+                },
+                {
+                    "blueDotDate": "2020-04-29"
+                },
+                {
+                    "blueDotDate": "2020-04-28"
+                },
+                {
+                    "blueDotDate": "2020-04-24"
+                },
+                {
+                    "blueDotDate": "2020-04-23"
+                }
+            ],
+            "isRSBlueDotSatisfied": 0,
+            "isASM": 0,
+            "isGSM": 0
+        },
+        "quarterlySalesAndEarningsInternational": null,
+        "priceestimates": {
+            "symbol": "DIX.IN",
+            "numPriceTarget": 3,
+            "meanTarget": 19676.67,
+            "highTarget": 21100,
+            "lowTarget": 17430
+        }
+    }
+}

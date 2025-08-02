@@ -157,7 +157,9 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
+        publish_branch: gh-pages
+        publish_dir: ./data/output/weekly/${{ steps.week.outputs.WEEK }}
+        destination_dir: data/weekly
         keep_files: true
         
     - name: 📊 Generate Summary

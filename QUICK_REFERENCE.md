@@ -16,6 +16,12 @@ TradingView NS: stocks_chimmu_ms
 GitHub Pages:   https://udhaya10.github.io/BlueDot-Trading-System
 ```
 
+## 📅 Automation Schedule
+```
+Daily:  9:00 AM UTC (4 AM EST / 1 AM PST / 2:30 PM IST)
+Weekly: 10:00 AM UTC Sundays (5 AM EST / 2 AM PST / 3:30 PM IST)
+```
+
 ## 🚀 Essential Commands
 
 ```bash

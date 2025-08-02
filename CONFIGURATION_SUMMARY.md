@@ -91,6 +91,20 @@ MEMORY_LIMIT_GB=8
 - PyYAML for configuration
 - Python-dotenv for environment variables
 
+## 📅 Automation Schedule
+
+### GitHub Actions Pipeline Schedule
+- **Daily Pipeline**: Runs at **9:00 AM UTC** every day
+  - 4:00 AM EST / 1:00 AM PST / 2:30 PM IST
+  - Processes files from Daily Google Drive folder
+  
+- **Weekly Pipeline**: Runs at **10:00 AM UTC** every Sunday
+  - 5:00 AM EST / 2:00 AM PST / 3:30 PM IST
+  - Processes files from Weekly Google Drive folder
+
+### Manual Triggers
+All workflows support manual execution via GitHub Actions tab with optional date/week parameters.
+
 ## 🚀 Quick Start Commands
 
 ### Activate Environment

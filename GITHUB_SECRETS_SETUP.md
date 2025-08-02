@@ -71,6 +71,12 @@ After adding all secrets, verify you have:
 - [ ] `WEEKLY_FOLDER_ID` - Set to `1-LY72Ml_FXr5SJK8wCySlSMB78OU6gM4`
 - [ ] `TRADINGVIEW_NAMESPACE` - Set to `stocks_chimmu_ms`
 
+## Automation Schedule
+
+Once configured, the workflows will run automatically:
+- **Daily Pipeline**: 9:00 AM UTC (4 AM EST / 1 AM PST / 2:30 PM IST)
+- **Weekly Pipeline**: 10:00 AM UTC Sundays (5 AM EST / 2 AM PST / 3:30 PM IST)
+
 ## Testing the Workflows
 
 ### Manual Trigger Test

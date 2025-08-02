@@ -18,6 +18,13 @@
 - **Cloud Integration**: Google Drive upload → GitHub Actions → TradingView
 - **Zero Manual Work**: Upload JSONs in morning → Automated processing → Ready for trading
 
+## 📅 Automation Schedule
+
+The system runs automatically via GitHub Actions:
+- **Daily Processing**: 9:00 AM UTC every day (4 AM EST / 1 AM PST / 2:30 PM IST)
+- **Weekly Processing**: 10:00 AM UTC every Sunday (5 AM EST / 2 AM PST / 3:30 PM IST)
+- **Manual Trigger**: Available anytime via GitHub Actions tab
+
 ## 📊 Data Sources
 - **Price Data**: OHLCV with timestamps from JSON chart.prices
 - **RLST Values**: Relative Strength ratings (0-99) time-aligned with price data

@@ -97,17 +97,26 @@ jobs:
         echo "=== File timestamps ==="
         stat data/output/weekly/${{ steps.week.outputs.WEEK }}/*.csv || true
         
-    - name: 🚀 Deploy to GitHub Pages
+    - name: 🗑️ Clean existing files
       if: success()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages
-        publish_dir: ./data/output/weekly/${{ steps.week.outputs.WEEK }}
-        destination_dir: data/weekly
-        keep_files: true
-        force_orphan: false
-        commit_message: "Deploy weekly data for ${{ steps.week.outputs.WEEK }}"
+      run: |
+        # Clone gh-pages branch
+        git clone --branch gh-pages --single-branch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-temp
+        
+        # Remove old files for this week
+        rm -rf gh-pages-temp/data/weekly/*.csv
+        
+        # Copy new files
+        mkdir -p gh-pages-temp/data/weekly
+        cp -r data/output/weekly/${{ steps.week.outputs.WEEK }}/* gh-pages-temp/data/weekly/
+        
+        # Commit and push
+        cd gh-pages-temp
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m "Deploy weekly data for ${{ steps.week.outputs.WEEK }} - $(date)" || echo "No changes to commit"
+        git push origin gh-pages
         
     - name: 📊 Generate Summary
       if: always()

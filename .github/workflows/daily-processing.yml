@@ -96,17 +96,26 @@ jobs:
         echo "=== File timestamps ==="
         stat data/output/daily/${{ steps.date.outputs.DATE }}/*.csv || true
         
-    - name: 🚀 Deploy to GitHub Pages
+    - name: 🗑️ Clean existing files
       if: success()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages
-        publish_dir: ./data/output/daily/${{ steps.date.outputs.DATE }}
-        destination_dir: data/daily
-        keep_files: true
-        force_orphan: false
-        commit_message: "Deploy daily data for ${{ steps.date.outputs.DATE }}"
+      run: |
+        # Clone gh-pages branch
+        git clone --branch gh-pages --single-branch https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages-temp
+        
+        # Remove old files for today
+        rm -rf gh-pages-temp/data/daily/*.csv
+        
+        # Copy new files
+        mkdir -p gh-pages-temp/data/daily
+        cp -r data/output/daily/${{ steps.date.outputs.DATE }}/* gh-pages-temp/data/daily/
+        
+        # Commit and push
+        cd gh-pages-temp
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add .
+        git commit -m "Deploy daily data for ${{ steps.date.outputs.DATE }} - $(date)" || echo "No changes to commit"
+        git push origin gh-pages
         
     - name: 📊 Generate Summary
       if: always()

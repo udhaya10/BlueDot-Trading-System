@@ -303,20 +303,35 @@ class BatchProcessor:
         
         # Save each CSV file
         file_configs = self.config['output']['files']
+        self.logger.info(f"File configs: {file_configs}")
+        self.logger.info(f"CSV outputs keys: {csv_outputs.keys()}")
         
         for data_type, file_suffix in file_configs.items():
-            if data_type.upper() in csv_outputs:
+            # Convert data_type to match CSV output keys
+            if data_type == 'price_data':
+                csv_key = 'PRICE_DATA'
+            elif data_type == 'rlst_rating':
+                csv_key = 'RLST_RATING'
+            elif data_type == 'bc_indicator':
+                csv_key = 'BC_INDICATOR'
+            elif data_type == 'blue_dots':
+                csv_key = 'BLUE_DOTS'
+            else:
+                continue
+                
+            self.logger.info(f"Processing {data_type} -> {csv_key}")
+            if csv_key in csv_outputs:
                 # Generate filename: SYMBOL_FILE_TYPE.csv
                 filename = f"{symbol}_{file_suffix}"
                 file_path = output_dir / filename
                 
                 # Write CSV data
-                csv_data = csv_outputs[data_type.upper()]
+                csv_data = csv_outputs[csv_key]
                 with open(file_path, 'w') as f:
                     for row in csv_data:
                         f.write(','.join(map(str, row)) + '\n')
                 
-                self.logger.debug(f"Saved {filename} with {len(csv_data)} rows")
+                self.logger.info(f"Saved {filename} with {len(csv_data)} rows")
 
 
 if __name__ == "__main__":

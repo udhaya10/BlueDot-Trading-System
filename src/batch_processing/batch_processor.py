@@ -220,22 +220,28 @@ class BatchProcessor:
             
         prices = json_data['chart']['prices']
         print(f"Type of prices: {type(prices)}")
-        print(f"Prices value: {prices[:2] if isinstance(prices, list) and len(prices) > 2 else prices}")
         
-        # Check if prices is actually a list
-        if not isinstance(prices, list):
-            self.logger.error(f"Prices is not a list, it's a {type(prices)}")
+        # Handle both list and dict formats
+        if isinstance(prices, dict):
+            # Convert dict to list of values
+            self.logger.info(f"Prices is a dict with {len(prices)} entries, converting to list")
+            print(f"Prices is a dict with {len(prices)} entries, converting to list")
+            price_list = list(prices.values())
+        elif isinstance(prices, list):
+            price_list = prices
+        else:
+            self.logger.error(f"Prices is neither list nor dict, it's a {type(prices)}")
             return csv_outputs
             
-        self.logger.info(f"Processing {len(prices)} price records")
-        print(f"Processing {len(prices)} price records")
+        self.logger.info(f"Processing {len(price_list)} price records")
+        print(f"Processing {len(price_list)} price records")
         
         # Debug: Check first price record structure
-        if prices and len(prices) > 0:
-            print(f"First price record keys: {list(prices[0].keys())}")
-            print(f"Sample price record: {prices[0]}")
+        if price_list and len(price_list) > 0:
+            print(f"First price record keys: {list(price_list[0].keys())}")
+            print(f"Sample price record: {price_list[0]}")
         
-        for i, price_record in enumerate(prices):
+        for i, price_record in enumerate(price_list):
             try:
                 # Convert timestamp
                 timestamp = self._convert_timestamp(price_record['priceDate'])
@@ -277,7 +283,7 @@ class BatchProcessor:
         # Process blue dot signals
         blue_dot_signals = self._generate_blue_dot_signals(
             json_data.get('chart', {}).get('blueDotData', {}), 
-            prices
+            price_list
         )
         csv_outputs['BLUE_DOTS'] = blue_dot_signals
         

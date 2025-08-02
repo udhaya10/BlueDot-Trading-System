@@ -1,0 +1,1 @@
+# BlueDot Trading System - Pine Script Module

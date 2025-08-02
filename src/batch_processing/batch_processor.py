@@ -259,23 +259,28 @@ class BatchProcessor:
         """Generate binary blue dot signals aligned with price data"""
         signals = []
         
-        # Get blue dot timestamps
-        blue_dot_timestamps = set()
+        # Get blue dot dates and convert to date strings for comparison
+        blue_dot_dates = set()
         if 'dates' in blue_dot_data and blue_dot_data['dates']:
             # Handle both formats: list of timestamps or list of objects
             for date_item in blue_dot_data['dates']:
                 if isinstance(date_item, dict) and 'blueDotDate' in date_item:
-                    blue_dot_timestamps.add(date_item['blueDotDate'])
+                    # Date string format (e.g., "2024-11-11")
+                    blue_dot_dates.add(date_item['blueDotDate'])
                 elif isinstance(date_item, (int, float)):
-                    blue_dot_timestamps.add(date_item)
+                    # Timestamp format - convert to date string
+                    dt = datetime.fromtimestamp(date_item / 1000)
+                    blue_dot_dates.add(dt.strftime('%Y-%m-%d'))
         
         # Generate signals for each price record
         for price_record in prices:
             timestamp = self._convert_timestamp(price_record['priceDate'])
-            price_timestamp = price_record['priceDate']
             
-            # Check if this timestamp has a blue dot signal
-            signal_value = 1 if price_timestamp in blue_dot_timestamps else 0
+            # Convert price timestamp to date string for comparison
+            price_date = datetime.fromtimestamp(price_record['priceDate'] / 1000).strftime('%Y-%m-%d')
+            
+            # Check if this date has a blue dot signal
+            signal_value = 1 if price_date in blue_dot_dates else 0
             
             signals.append([
                 timestamp,

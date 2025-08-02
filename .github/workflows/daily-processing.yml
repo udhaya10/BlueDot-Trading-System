@@ -1,0 +1,102 @@
+name: Daily Processing Pipeline
+
+on:
+  schedule:
+    # Run at 9 AM UTC every day (4 AM EST / 1 AM PST)
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date to process (YYYY-MM-DD)'
+        required: false
+        type: string
+
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  process-daily-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120  # 2 hour timeout
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: 📦 Install Dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install google-api-python-client google-auth google-auth-httplib2 google-auth-oauthlib python-dotenv
+        
+    - name: 🔑 Setup Credentials
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_DRIVE_SERVICE_ACCOUNT }}
+      run: |
+        mkdir -p .credentials
+        echo "$GOOGLE_CREDENTIALS" | base64 -d > .credentials/google-drive-service-account.json
+        chmod 600 .credentials/google-drive-service-account.json
+        
+    - name: 🔧 Create Environment Configuration
+      run: |
+        cat > .env << EOF
+        GOOGLE_DRIVE_SERVICE_ACCOUNT=.credentials/google-drive-service-account.json
+        DAILY_FOLDER_ID=${{ secrets.DAILY_FOLDER_ID }}
+        WEEKLY_FOLDER_ID=${{ secrets.WEEKLY_FOLDER_ID }}
+        GITHUB_USERNAME=${{ github.repository_owner }}
+        TRADINGVIEW_NAMESPACE=${{ secrets.TRADINGVIEW_NAMESPACE }}
+        PROCESSING_MODE=production
+        MAX_FILES_PER_BATCH=100
+        PARALLEL_WORKERS=4
+        EOF
+        
+    - name: 📅 Set Processing Date
+      id: date
+      run: |
+        if [ -n "${{ github.event.inputs.date }}" ]; then
+          echo "DATE=${{ github.event.inputs.date }}" >> $GITHUB_OUTPUT
+        else
+          echo "DATE=$(date -u +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+        fi
+        echo "Processing date: $(cat $GITHUB_OUTPUT)"
+        
+    - name: 📥 Download and Process Daily Data
+      run: |
+        python process_from_drive.py
+        
+    - name: 🔍 Verify Output
+      run: |
+        echo "Checking output directory..."
+        ls -la data/output/daily/${{ steps.date.outputs.DATE }}/ || echo "No output found"
+        
+    - name: 📊 Prepare GitHub Pages Deployment
+      if: success()
+      run: |
+        mkdir -p docs/data/daily
+        if [ -d "data/output/daily/${{ steps.date.outputs.DATE }}" ]; then
+          cp -r data/output/daily/${{ steps.date.outputs.DATE }}/* docs/data/daily/
+          echo "Copied $(ls -1 data/output/daily/${{ steps.date.outputs.DATE }}/*.csv | wc -l) CSV files"
+        fi
+        
+    - name: 🚀 Deploy to GitHub Pages
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        keep_files: true
+        
+    - name: 📊 Generate Summary
+      if: always()
+      run: |
+        echo "## Daily Processing Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- Date: ${{ steps.date.outputs.DATE }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Status: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+        if [ -d "data/output/daily/${{ steps.date.outputs.DATE }}" ]; then
+          echo "- Files processed: $(ls -1 data/output/daily/${{ steps.date.outputs.DATE }}/*.csv 2>/dev/null | wc -l)" >> $GITHUB_STEP_SUMMARY
+        fi

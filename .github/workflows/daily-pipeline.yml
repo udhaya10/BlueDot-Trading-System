@@ -1,0 +1,96 @@
+name: Daily Data Pipeline
+on:
+  schedule:
+    - cron: '0 9 * * *'  # 9 AM UTC daily (adjust for your timezone)
+  workflow_dispatch:     # Manual trigger
+  repository_dispatch:   # External API trigger
+    types: [daily-data-ready]
+
+env:
+  PYTHON_VERSION: '3.12'
+  
+jobs:
+  process-daily-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300  # 5 hours maximum
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip'
+        
+    - name: 📦 Install Dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: 📊 Download Daily Data from Google Drive
+      env:
+        GOOGLE_DRIVE_API_KEY: ${{ secrets.GOOGLE_DRIVE_API_KEY }}
+        GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.DAILY_FOLDER_ID }}
+      run: |
+        echo "📥 Downloading daily JSON files from Google Drive..."
+        python src/cloud_integration/download_daily_data.py
+        
+    - name: 🔍 Validate Downloaded Data
+      run: |
+        echo "🔍 Validating data integrity..."
+        python src/batch_processing/validate_batch_data.py --timeframe daily
+        
+    - name: ⚡ Process Daily JSON Batch
+      run: |
+        echo "⚡ Processing daily batch (up to 1000+ JSON files)..."
+        python src/batch_processing/process_daily_batch.py
+        
+    - name: 📈 Generate Status Report
+      run: |
+        echo "📈 Generating processing statistics..."
+        python src/monitoring/generate_report.py --timeframe daily
+        
+    - name: 🚀 Upload CSVs to GitHub Pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "🚀 Uploading processed CSVs to GitHub Pages..."
+        python src/cloud_integration/upload_to_pages.py --timeframe daily
+        
+    - name: 🔗 Update Latest Symlinks
+      run: |
+        echo "🔗 Updating latest data links..."
+        python src/cloud_integration/update_latest_links.py --timeframe daily
+        
+    - name: 📊 Deploy Status Dashboard
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        
+    - name: 📱 Send Success Notification
+      if: success()
+      env:
+        WEBHOOK_URL: ${{ secrets.SUCCESS_WEBHOOK_URL }}
+      run: |
+        echo "📱 Sending success notification..."
+        python src/monitoring/send_notification.py --status success --timeframe daily
+        
+    - name: 🚨 Send Failure Notification
+      if: failure()
+      env:
+        WEBHOOK_URL: ${{ secrets.ERROR_WEBHOOK_URL }}
+      run: |
+        echo "🚨 Sending failure notification..."
+        python src/monitoring/send_notification.py --status failure --timeframe daily
+        
+    - name: 🧹 Cleanup Temporary Files
+      if: always()
+      run: |
+        echo "🧹 Cleaning up temporary files..."
+        rm -rf data/raw/temp_*
+        rm -rf data/processed/temp_*

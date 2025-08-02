@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+*.egg-info/
+.pytest_cache/
+
+# Credentials and sensitive files
+.credentials/
+.env
+*.json
+!sample_*.json
+!data_config.yaml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Data directories
+data/output/
+data/processed/
+data/raw/*
+!data/raw/sample_*.json
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# GitHub Actions
+.github/workflows/run-logs/
